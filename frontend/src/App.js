@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react';
 import { Button } from 'react-bootstrap';
 
 import { getAlchemyInfo, getNFTsForOwner } from './components/interfaces';
+import AlchemyDataService from './services/alchemy';
 import './App.css';
 
 export default function App() {
@@ -12,6 +13,16 @@ export default function App() {
         console.log(`wallet: ${wallet}`);
 
         const nftData = await getNFTsForOwner(wallet);
+        // let nftData = [];
+        // AlchemyDataService.getNFTsForOwner(wallet)
+        //     .then((response) => {
+        //         console.log(response.data);
+        //         nftData = response.data;
+        //         // processNFTs(nftData);
+        //     })
+        //     .catch((e) => {
+        //         console.log(e);
+        //     });
         console.log(`nftData: ${nftData}`);
 
         const nftArray = nftData;

@@ -3,7 +3,7 @@ const dotenv = require('dotenv');
 const { app } = require('./server.js');
 
 async function main() {
-    const port = process.env.PORT || 8082;
+    const port = process.env.SERVER_PORT || 8082;
 
     dotenv.config();
     try {

@@ -17,12 +17,14 @@ export async function getAlchemyInfo(wallet) {
 export async function getNFTsForOwner(address) {
     console.log('getNFTsForOwner called');
     const url = process.env.REACT_APP_API_BASE_URL + 'api/nfts/' + address;
+    console.log({ url });
     const options = {
         method: 'GET',
         headers: {
             'Content-Type': 'application/json',
         },
     };
+    console.log({ options });
     let response = await fetch(url, options);
     let data = await response.json();
     console.log('getNFTsForOwner data: ' + data);

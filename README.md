@@ -4,6 +4,12 @@
 
 The idea behind this app is a fun project that will allow a Neo Tokyo citizen to connect to the app and have their citizen automatically re-imagined with different art styles.
 
+## Get Started
+
+1. Create a `.env.development` within the `/frontend` and `/backend` directories.
+2. Start backend server with command: `npm run dev`
+3. Start frontend with command: `npm start`
+
 ## To Do
 
 ### Frontend
@@ -80,6 +86,10 @@ Frontend
 -   Created interface to pull nfts for a wallet address and display them in browser.
 
 ### 12/28/2023
+
+-   Consolidated the front and backend repos under 1 main repository and made first push to GitHub.
+-   Troubleshooting the .env files with React. Each server will need to have their own `.env.development` and `.env.production`.
+-   Created an [`AlchemyDataService`](./frontend/src/services/alchemy.js) class but it does not render the images like the [interfaces.js](./frontend/src/components/interfaces.js).
 
 ## Contributions
 
