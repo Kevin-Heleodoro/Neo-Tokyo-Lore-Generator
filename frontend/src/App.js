@@ -54,6 +54,7 @@ export default function App() {
             <Button onClick={loadNFTs} id="wallet">
                 Load NFTs
             </Button>
+            {/* Setup a loading spinner while the api fetches the user's citizen. */}
             <NftCardContainer nfts={nfts} />
         </div>
     );
