@@ -1,7 +1,7 @@
 const dotenv = require('dotenv');
 const { Alchemy, Network } = require('alchemy-sdk');
 
-const NTAddresses = require('../../config/NTAddresses');
+const { ContractAddresses } = require('../../config/apiConfig.js');
 
 class NFTController {
     // First attempt at finding a way to reduce the number of times we have to
@@ -16,6 +16,8 @@ class NFTController {
     //     return alchemy;
     // }
 
+    // This function is used to get the NFTs for a given address. It will
+    // return an array of NFTs that are owned by the address.
     static async apiGetNFTsForOwner(req, res) {
         console.log('apiGetNFTsForOwner');
         dotenv.config();
@@ -59,6 +61,9 @@ class NFTController {
         }
     }
 
+    // This function is used to get the citizen for a given address. It will
+    // return an array of NFTs that are owned by the address and are from
+    // ContractAddresses.
     static async apiGetOwnersCitizen(req, res) {
         console.log('apiGetOwnersCitizen');
         dotenv.config();
@@ -72,15 +77,15 @@ class NFTController {
         try {
             // This is a bit of a hack, but it works for now. We get all the
             // NFTs for the address, then filter out the ones that aren't
-            // from NTAddresses. This is because the NFTs for the address
+            // from ContractAddresses. This is because the NFTs for the address
             // could be from multiple contracts, and we only want the ones
-            // from NTAddresses.
+            // from ContractAddresses.
             const nfts = await alchemy.nft.getNftsForOwner(address);
             const nftList = nfts['ownedNfts'];
             let citizen = [];
             for (let nft of nftList) {
                 if (
-                    Object.values(NTAddresses).includes(
+                    Object.values(ContractAddresses).includes(
                         nft['contract']['address']
                     )
                 ) {

@@ -1,10 +1,48 @@
-### 12/5/2023
+### 2024-05-01
+
+-   Added mock up route for generating backstory and openAi API key
+-   New background color and variable in index.css
+
+### 2024-01-10
+
+-   Fixed the alchemyDataService in Frontend. I needed to set the methods to `async` and then `await` the calls.
+-   Created first iteration of Header.
+-   Created first iteration of NftCardContainer and NftCard
+-   Added the getCitizenForWallet route to alchemy.js
+-   Need to work on what I want the app to actually look like. Side navbar or top header? Do I even need a header? The MVP is to allow a citizen to connect their wallet, verify that they have a citizen NFT, grant access to lore generator, use chatgpt to create a background for the citizen based on the nft's traits, then allow the citizen to share on twitter
+
+### 2023-12-28
+
+-   Consolidated the front and backend repos under 1 main repository and made first push to GitHub.
+-   Troubleshooting the .env files with React. Each server will need to have their own `.env.development` and `.env.production`.
+-   Created an [`AlchemyDataService`](./frontend/src/services/alchemy.js) class but it does not render the images like the [interfaces.js](./frontend/src/components/interfaces.js).
+-
+
+### 2023-12-27
+
+Frontend
+
+-   Created .env.development.local to begin routing API to the backend.
+-   Created interface to pull nfts for a wallet address and display them in browser.
+
+### 2023-12-26
 
 Backend
 
--   Created logic for pulling all nfts from an address and parsing through them.
+-   Created route for getting a wallet's citizens. This is not the "best" way to do it, but it works for now. Will look into the most secure way to do so. Most likely will be within a smart contract itself.
+    Middleware
+-   Not sure what to do with this...
+    Frontend
+-   Need to remove the middleware calls and reroute to the backend.
 
-### 12/7/2023
+### 2023-12-23
+
+Backend
+
+-   I tried to mimic the net2dev demo from youtube with having a middleware outside the backend, but there was some content missing and I'm not sure if it was because that developer was using Next.js instead of React.
+-   Created the nftController that returns all of the nfts for a given address.
+
+### 2023-12-07
 
 Backend
 
@@ -12,48 +50,18 @@ Backend
 -   Created server.js
 -   Created ./api/router.js
 -   My original thoughts were to mimic the NetDex Project I made which implemented a Controller/DAO approach to routing API calls.
-
-Frontend
-
+    Frontend
 -   Initialized frontend.
 -   Created interface for handling middleware.
 
-### 12/23/2023??
+### 2023-12-05
 
 Backend
 
--   I tried to mimic the net2dev demo from youtube with having a middleware outside the backend, but there was some content missing and I'm not sure if it was because that developer was using Next.js instead of React.
--   Created the nftController that returns all of the nfts for a given address.
+-   Created logic for pulling all nfts from an address and parsing through them.
 
-### 12/26/2023
-
-Backend
-
--   Created route for getting a wallet's citizens. This is not the "best" way to do it, but it works for now. Will look into the most secure way to do so. Most likely will be within a smart contract itself.
-
-Middleware
-
--   Not sure what to do with this...
-
-Frontend
-
--   Need to remove the middleware calls and reroute to the backend.
-
-### 12/27/2023
-
-Frontend
-
--   Created .env.development.local to begin routing API to the backend.
--   Created interface to pull nfts for a wallet address and display them in browser.
-
-### 12/28/2023
-
--   Consolidated the front and backend repos under 1 main repository and made first push to GitHub.
--   Troubleshooting the .env files with React. Each server will need to have their own `.env.development` and `.env.production`.
--   Created an [`AlchemyDataService`](./frontend/src/services/alchemy.js) class but it does not render the images like the [interfaces.js](./frontend/src/components/interfaces.js).
--
-
-### 1/10/2024
+-   Added new feature XYZ.
+-   Fixed bug ABC.
 
 -   Fixed the alchemyDataService in Frontend. I needed to set the methods to `async` and then `await` the calls.
 -   Created first iteration of Header.

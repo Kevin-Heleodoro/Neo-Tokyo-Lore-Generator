@@ -10,6 +10,14 @@ The idea behind this app is a fun project that will allow a Neo Tokyo citizen to
 2. Start backend server with command: `npm run dev`
 3. Start frontend with command: `npm start`
 
+## Routes
+
+/api/v1/citizen/:address
+
+/api/v1/nfts/:address
+
+/api/v1/ai/generate
+
 ## To Do
 
 ### Frontend
@@ -34,6 +42,10 @@ The idea behind this app is a fun project that will allow a Neo Tokyo citizen to
 [Frontend](./frontend/README.md)
 [Middleware](./middleware/README.md)
 [Backend](./backend/README.md)
+
+## Resources
+
+[OpenAI Quickstart Guide](https://platform.openai.com/docs/quickstart?context=node)
 
 ## Contributions
 

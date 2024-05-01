@@ -11,7 +11,7 @@ const options = {
 app.use(cors(options));
 app.use(express.json());
 
-app.use('/api', router);
+app.use('/api/v1', router);
 
 app.use('*', (req, res) =>
     res.status(404).json({ error: 'Nice try meatbag ...' })
