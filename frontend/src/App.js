@@ -3,6 +3,7 @@ import { Button } from 'react-bootstrap';
 
 import Header from './components/Header/Header';
 import NftCardContainer from './components/NftComponents/NftCardContainer';
+import LandingPage from './components/LandingPage/LandingPage';
 
 import AlchemyDataService from './services/alchemy';
 
@@ -48,14 +49,19 @@ export default function App() {
     };
 
     return (
-        <div className="App" style={{ 'text-align': 'center' }}>
-            <Header />
-            <input type="text" id="wallet" />
-            <Button onClick={loadNFTs} id="wallet">
-                Load NFTs
-            </Button>
-            {/* Setup a loading spinner while the api fetches the user's citizen. */}
-            <NftCardContainer nfts={nfts} />
+        <div className="App" style={{ textAlign: 'center' }}>
+            <LandingPage />
         </div>
     );
 }
+
+// <div className="App" style={{ textAlign: 'center' }}>
+//             {/* <Header />
+//             <input type="text" id="wallet" />
+//             <Button onClick={loadNFTs} id="wallet">
+//                 Load NFTs
+//             </Button>
+//             {/* Setup a loading spinner while the api fetches the user's citizen. */}
+//             {/* <NftCardContainer nfts={nfts} /> */}
+//             <LandingPage />
+//         </div>

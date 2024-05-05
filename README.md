@@ -47,6 +47,8 @@ The idea behind this app is a fun project that will allow a Neo Tokyo citizen to
 
 [OpenAI Quickstart Guide](https://platform.openai.com/docs/quickstart?context=node)
 
+[Delegate.xyz](https://docs.delegate.xyz/)
+
 ## Contributions
 
 @goldensun.eth
