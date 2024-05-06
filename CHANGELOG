@@ -1,3 +1,7 @@
+### 2024-05-06
+
+-   Added logic for connecting wallet (Need to implement error handling and user display message)
+
 ### 2024-05-04
 
 -   Added background image to `public`

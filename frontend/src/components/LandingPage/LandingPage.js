@@ -1,6 +1,8 @@
 import React from 'react';
 import styled from 'styled-components';
 
+import { connectWallet } from '../interfaces';
+
 const PageContainer = styled.div`
     height: 100vh;
     display: flex;
@@ -37,7 +39,7 @@ const ConnectButton = styled.button`
 const LandingPage = () => {
     return (
         <PageContainer>
-            <ConnectButton onClick={() => console.log('Connect Wallet')}>
+            <ConnectButton onClick={connectWallet}>
                 Connect Wallet
             </ConnectButton>
         </PageContainer>
