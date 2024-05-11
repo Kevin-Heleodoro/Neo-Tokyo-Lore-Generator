@@ -25,11 +25,15 @@ The idea behind this app is a fun project that will allow a Neo Tokyo citizen to
 -   a react frontend to display the citizen's NT portfolio (bytes, citizens, pieces)
 -   Users signing on for the first time will be presented a screen that says something along the lines of welcome to the citizen law storymaker whatever they will sign in gasless transaction obviously and then that will present them to just a single page where they can connect their wallet and it'll pull up their citizens and they are able to create a background story for where their character came from in the Tokyo and then citizens that have previously come to the site they will be able to see their previous renderings of their background stories and all that people that don't have citizens obviously we just get told that their meat bags.
 -   Error handling on wallet connection
+-   Resize the favicon
+-
 
 ### Backend
 
 -   web3 connectivity to ensure only citizens can connect
 -   add support for wallet delegation
+-   Reduce number of times the alchemy provider needs to be created
+    -   Abstract into the server and pass it into the controller functions?
 
 ### AI
 

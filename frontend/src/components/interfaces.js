@@ -35,17 +35,21 @@ export async function getNFTsForOwner(address) {
 
 export async function connectWallet() {
     console.log('connectWallet called');
-    if (typeof window.ethereum !== 'undefined') {
+    let provider;
+    let signer = null;
+
+    if (window.ethereum == null) {
+        console.log('No ethereum provider found');
+        provider = ethers.getDefaultProvider();
+    } else {
         try {
-            const provider = new ethers.BrowserProvider(window.ethereum);
+            provider = new ethers.BrowserProvider(window.ethereum);
             await provider.send('eth_requestAccounts', []);
-            const signer = provider.getSigner();
+            signer = await provider.getSigner();
             console.log(`Account: ${await signer.getAddress()}`);
             return signer;
         } catch (error) {
             console.log(`User denied account access: ${error}`);
         }
-    } else {
-        console.log('No ethereum provider found');
     }
 }
