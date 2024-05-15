@@ -29,6 +29,7 @@ export default function App() {
                         <Dashboard
                             nfts={nfts}
                             setNfts={setNfts}
+                            loading={loading}
                             setLoading={setLoading}
                             isWalletConnected={isWalletConnected}
                         />
