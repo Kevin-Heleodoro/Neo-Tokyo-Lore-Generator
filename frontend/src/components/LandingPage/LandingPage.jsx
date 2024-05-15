@@ -1,7 +1,6 @@
-import React from 'react';
+import { ethers } from 'ethers';
+import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
-
-import { connectWallet } from '../interfaces';
 
 const PageContainer = styled.div`
     height: 100vh;
@@ -36,7 +35,32 @@ const ConnectButton = styled.button`
     }
 `;
 
-const LandingPage = () => {
+const LandingPage = ({ setIsWalletConnected }) => {
+    const navigate = useNavigate();
+
+    async function connectWallet() {
+        console.log('connectWallet called');
+        let provider;
+        let signer = null;
+
+        if (window.ethereum == null) {
+            console.log('No ethereum provider found');
+            provider = ethers.getDefaultProvider();
+        } else {
+            try {
+                provider = new ethers.BrowserProvider(window.ethereum);
+                await provider.send('eth_requestAccounts', []);
+                signer = await provider.getSigner();
+                console.log(`Account: ${await signer.getAddress()}`);
+                setIsWalletConnected(true);
+                navigate('/home');
+                return signer;
+            } catch (error) {
+                console.log(`User denied account access: ${error}`);
+            }
+        }
+    }
+
     return (
         <PageContainer>
             <ConnectButton onClick={connectWallet}>

@@ -1,3 +1,10 @@
+### 2024-05-14
+
+-   Refactored components to `.jsx`
+-   Added React router
+-   Moved connect Wallet functionality to `LandingPage` component
+-   Created error page
+
 ### 2024-05-11
 
 -   Added mobile background image to public/img
