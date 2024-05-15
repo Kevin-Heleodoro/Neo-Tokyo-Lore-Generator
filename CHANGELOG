@@ -1,9 +1,17 @@
+### 2024-05-15
+
+-   Updated styling on Header. Still not 100% happy with it.
+    -   Added button for connected wallet
+-   Updated styling on NftCard. Getting there
+    -   Added button to get lore
+
 ### 2024-05-14
 
 -   Refactored components to `.jsx`
 -   Added React router
 -   Moved connect Wallet functionality to `LandingPage` component
 -   Created error handling for failing to render pages and unmatched routes
+-   Began styling the NftCard component
 
 ### 2024-05-11
 

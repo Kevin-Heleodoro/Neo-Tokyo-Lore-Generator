@@ -34,15 +34,16 @@ export async function getNFTsForOwner(address) {
 }
 
 /**
- * This function gets the citizen(s) for a wallet address and returns the data in an array
+ * This function gets the citizen(s) for a wallet address and returns the data in an array.
  *
- * @param {*} wallet
- * @returns {Array} outArray
+ * @param {*} wallet The wallet address to get citizen data for
+ * @returns {Array} An array of citizen data
  */
 export async function getCitizenForWallet(wallet) {
     let nftData = [];
     const outArray = [];
 
+    // Get the citizen(s) for the wallet address
     await AlchemyDataService.getCitizenForWallet(wallet)
         .then((response) => {
             nftData = response.data;
@@ -51,6 +52,7 @@ export async function getCitizenForWallet(wallet) {
             console.log(e);
         });
 
+    // Filter out spam contracts and add the image URL to the data
     nftData.forEach((nft) => {
         if (nft.contract.isSpam === true) return;
         let imagePath = nft.image.originalUrl;
@@ -68,4 +70,10 @@ export async function getCitizenForWallet(wallet) {
     });
 
     return outArray;
+}
+
+export async function getLoreForCitizen(citizen) {
+    console.log('getLoreForCitizen called');
+    // const url = process.env.REACT_APP_API_BASE_URL + 'api/lore/' + citizenId;
+    return 'Lore for citizen goes here...';
 }
