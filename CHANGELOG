@@ -3,7 +3,7 @@
 -   Refactored components to `.jsx`
 -   Added React router
 -   Moved connect Wallet functionality to `LandingPage` component
--   Created error page
+-   Created error handling for failing to render pages and unmatched routes
 
 ### 2024-05-11
 
