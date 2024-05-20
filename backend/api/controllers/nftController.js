@@ -19,8 +19,6 @@ class NFTController {
     // This function is used to get the NFTs for a given address. It will
     // return an array of NFTs that are owned by the address.
     static async apiGetNFTsForOwner(req, res) {
-        console.log('apiGetNFTsForOwner');
-        dotenv.config();
         const config = {
             apiKey: process.env.ALCHEMY_API_KEY,
             network: Network.Mainnet,
@@ -39,17 +37,12 @@ class NFTController {
             const nftResults = [];
             for (let nft of nftList) {
                 if (nft['name']) {
-                    // console.log(`NFT #${i}: ${nft['name']}`);
                     nftResults.push(nft);
                     i++;
                 } else {
                     junkNfts++;
                 }
             }
-
-            console.log(
-                `Address: ${address} \nNumber of junk NFTs: ${junkNfts} \nTotal NFTs: ${numNfts}`
-            );
 
             res.json(nftResults);
         } catch (error) {
@@ -65,8 +58,6 @@ class NFTController {
     // return an array of NFTs that are owned by the address and are from
     // ContractAddresses.
     static async apiGetOwnersCitizen(req, res) {
-        console.log('apiGetOwnersCitizen');
-        dotenv.config();
         const config = {
             apiKey: process.env.ALCHEMY_API_KEY,
             network: Network.Mainnet,

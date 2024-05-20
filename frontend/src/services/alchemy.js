@@ -17,6 +17,11 @@ class AlchemyDataService {
         console.log('getCitizenForWallet called');
         return axios.get(BASE_URL + '/citizen/' + address);
     }
+
+    async getLoreForCitizen(citizen) {
+        console.log('getLoreForCitizen called');
+        return axios.post(BASE_URL + '/ai/generate', citizen);
+    }
 }
 
 // eslint-disable-next-line import/no-anonymous-default-export

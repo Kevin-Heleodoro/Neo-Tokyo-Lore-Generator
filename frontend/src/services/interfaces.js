@@ -36,7 +36,7 @@ export async function getNFTsForOwner(address) {
 /**
  * This function gets the citizen(s) for a wallet address and returns the data in an array.
  *
- * @param {*} wallet The wallet address to get citizen data for
+ * @param {String} wallet The wallet address to get citizen data for
  * @returns {Array} An array of citizen data
  */
 export async function getCitizenForWallet(wallet) {
@@ -50,6 +50,7 @@ export async function getCitizenForWallet(wallet) {
         })
         .catch((e) => {
             console.log(e);
+            return '';
         });
 
     // Filter out spam contracts and add the image URL to the data
@@ -64,7 +65,6 @@ export async function getCitizenForWallet(wallet) {
                 img: imagePath.replace('ipfs://', 'https://ipfs.io/ipfs/'),
                 ...nft,
             };
-            console.log(nftData);
             outArray.push(nftData);
         }
     });
@@ -72,8 +72,24 @@ export async function getCitizenForWallet(wallet) {
     return outArray;
 }
 
+/**
+ * This function takes the citizen's metadata and calls on the backend to create a backstory for this citizen.
+ *
+ * @param {Object} citizen
+ * @returns {String} The citizen's backstory
+ */
 export async function getLoreForCitizen(citizen) {
-    console.log('getLoreForCitizen called');
-    // const url = process.env.REACT_APP_API_BASE_URL + 'api/lore/' + citizenId;
-    return 'Lore for citizen goes here...';
+    let result;
+
+    await AlchemyDataService.getLoreForCitizen(citizen)
+        .then((response) => {
+            console.log(response.data);
+            result = response.data;
+        })
+        .catch((e) => {
+            console.log(e);
+            return '';
+        });
+
+    return result;
 }
