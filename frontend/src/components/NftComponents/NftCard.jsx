@@ -33,7 +33,7 @@ const NftCard = ({ nft }) => {
 
             let lore = await getLoreForCitizen(citizenInput);
             console.log(lore);
-            // setBackstory(lore);
+
             setBackstory(
                 lore
                     .split('\n')
@@ -53,7 +53,9 @@ const NftCard = ({ nft }) => {
             </ImageContainer>
             <Details>
                 <p>{nft.name}</p>
-                <Button onClick={handleGenerateBackstory}>Who am I?</Button>
+                {!backstory && (
+                    <Button onClick={handleGenerateBackstory}>Who am I?</Button>
+                )}
                 {backstory && (
                     <BackstoryContainer>{backstory}</BackstoryContainer>
                 )}
@@ -73,7 +75,6 @@ const Card = styled.div`
     border: 2px solid #8a2be2;
     border-radius: 15px;
     padding: 20px;
-    ${'' /* max-width: 350px; */}
     max-width: 400px;
     margin: auto;
     color: white;
@@ -90,7 +91,6 @@ const ImageContainer = styled.div`
 const NftImage = styled.img`
     border-radius: 10px;
     width: 100%;
-    ${'' /* max-width: 300px; */}
 `;
 
 const Details = styled.div`
@@ -126,39 +126,3 @@ const BackstoryContainer = styled.div`
 const Paragraph = styled.p`
     margin-bottom: 10px;
 `;
-
-// const Card = styled.div`
-//     border: 1px solid #e2e2e2;
-//     border-radius: 10px;
-//     padding: 1rem;
-//     margin: 1rem;
-//     width: 300px;
-//     box-shadow: 0 4px 6px 0 hsla(0, 0%, 0%, 0.07);
-//     background-color: #2a2a2a; // dark background color
-//     color: #f0f0f0; // light text color
-//     word-wrap: break-word; // prevent text from spilling out
-// `;
-
-// const CardHeader = styled.h2`
-//     font-size: 1.25rem;
-//     margin-bottom: 1rem;
-// `;
-
-// const CardImage = styled.img`
-//     width: 100%;
-//     height: 200px;
-//     object-fit: contain; // adjust to prevent excessive cropping
-//     border-radius: 10px;
-//     margin-bottom: 1rem;
-// `;
-
-// const CardText = styled.div`
-//     font-size: 1rem;
-//     text-align: center;
-// `;
-
-// const CardInfo = styled.div`
-//     font-size: 0.875rem;
-//     color: #888;
-//     margin-bottom: 0.5rem;
-// `;

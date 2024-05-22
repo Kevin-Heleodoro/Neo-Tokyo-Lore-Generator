@@ -47,6 +47,7 @@ export async function getCitizenForWallet(wallet) {
     await AlchemyDataService.getCitizenForWallet(wallet)
         .then((response) => {
             nftData = response.data;
+            console.log(nftData);
         })
         .catch((e) => {
             console.log(e);

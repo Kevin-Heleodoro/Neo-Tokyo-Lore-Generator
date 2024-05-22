@@ -1,3 +1,10 @@
+### 2024-05-21
+
+-   Refactored header and search bar
+-   Updated dashboard background
+-   Added information div to alert user that they don't own a citizen and they can search for an address
+-   Refactored connect/disconnect button in header
+
 ### 2024-05-15
 
 -   Updated styling on Header. Still not 100% happy with it.

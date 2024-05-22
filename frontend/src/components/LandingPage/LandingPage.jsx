@@ -24,8 +24,7 @@ const LandingPage = ({ setIsWalletConnected }) => {
                 provider = new ethers.BrowserProvider(window.ethereum);
                 await provider.send('eth_requestAccounts', []);
                 signer = await provider.getSigner();
-                // console.log({ signer });
-                // console.log(`Account: ${await signer.getAddress()}`);
+
                 setIsWalletConnected(true);
                 navigate('/home', { state: { signer } });
                 return signer;
