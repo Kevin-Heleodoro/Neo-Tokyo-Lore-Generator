@@ -1,3 +1,9 @@
+### 2024-05-24
+
+-   Abstracted connectWallet function to walletUtility.js
+-   Added local storage logic to connectWallet and disconnectWallet
+-   Need to work on figuring out why the Wallet button renders as `Wallet:` on initial render when the wallet is not connected.
+
 ### 2024-05-21
 
 -   Refactored header and search bar

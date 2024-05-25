@@ -1,3 +1,4 @@
+import { useEffect, useState } from 'react';
 import { createGlobalStyle } from 'styled-components';
 import { useLocation } from 'react-router-dom';
 
@@ -10,19 +11,34 @@ import HeaderComponent from '../Header/Header';
  */
 const Dashboard = ({ nfts, setNfts, loading, setLoading }) => {
     const location = useLocation();
-    const signer = location.state.signer || '';
+    const [isConnected, setIsConnected] = useState(true);
+    const [walletAddress, setWalletAddress] = useState('');
+    const [signer, setSigner] = useState('');
+    // const signer = location.state.signer || '';
+
+    useEffect(() => {
+        if (location.state.signer) {
+            setSigner(location.state.signer);
+        }
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, []);
 
     return (
         <div id="app">
             <GlobalStyle />
             <HeaderComponent
                 signerAddress={signer.address}
+                setSigner={setSigner}
                 nfts={nfts}
                 setNfts={setNfts}
                 loading={loading}
                 setLoading={setLoading}
+                walletAddress={walletAddress}
+                setWalletAddress={setWalletAddress}
+                isConnected={isConnected}
+                setIsConnected={setIsConnected}
             />
-            <NftCardContainer nfts={nfts} />
+            <NftCardContainer nfts={nfts} walletAddress={walletAddress} />
         </div>
     );
 };

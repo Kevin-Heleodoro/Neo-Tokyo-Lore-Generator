@@ -1,6 +1,7 @@
-import { ethers } from 'ethers';
 import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
+
+import { connectWallet } from '../../utilities/walletUtility';
 
 /**
  * This component is the landing page for the application. It displays a "Connect Wallet"
@@ -13,24 +14,12 @@ const LandingPage = ({ setIsWalletConnected }) => {
     const navigate = useNavigate();
 
     async function handleConnectWallet() {
-        let provider;
-        let signer = null;
-
-        if (window.ethereum == null) {
-            console.log('No ethereum provider found');
-            provider = ethers.getDefaultProvider();
+        const { signature, signer } = await connectWallet();
+        if (signature) {
+            // setIsWalletConnected(true);
+            navigate('/home', { state: { signer } });
         } else {
-            try {
-                provider = new ethers.BrowserProvider(window.ethereum);
-                await provider.send('eth_requestAccounts', []);
-                signer = await provider.getSigner();
-
-                setIsWalletConnected(true);
-                navigate('/home', { state: { signer } });
-                return signer;
-            } catch (error) {
-                console.log(`User denied account access: ${error}`);
-            }
+            console.log('User denied account access');
         }
     }
 
