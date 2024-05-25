@@ -2,7 +2,8 @@ import { useState, useRef, useEffect } from 'react';
 import { useLocation } from 'react-router-dom';
 import styled from 'styled-components';
 
-import { getCitizenForWallet } from '../../services/interfaces';
+import SearchContainer from './SearchContainer';
+// import { getCitizenForWallet } from '../../services/interfaces';
 import {
     connectWallet,
     disconnectWallet,
@@ -26,14 +27,19 @@ const HeaderComponent = ({
     setWalletAddress,
     setSigner,
 }) => {
-    const searchInputRef = useRef(null);
+    // const searchInputRef = useRef(null);
     const dropdownRef = useRef(null);
     const [showDropdown, setShowDropdown] = useState(false);
     const location = useLocation();
 
+    // Detect if wallet is already connected
     useEffect(() => {
         if (signerAddress) {
             setWalletAddress(formatAddress(signerAddress));
+        }
+
+        if (location.state.signer) {
+            setWalletAddress(formatAddress(location.state.signer.address));
         }
 
         // Cannot set isWalletConnected here to false because it will disconnect everytime the page loads.
@@ -41,6 +47,22 @@ const HeaderComponent = ({
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
 
+    // Detect wallet change
+    useEffect(() => {
+        if (window.ethereum) {
+            window.ethereum.on('accountsChanged', (accounts) => {
+                if (accounts.length > 0) {
+                    setWalletAddress(formatAddress(accounts[0]));
+                    localStorage.setItem('walletAddress', accounts[0]);
+                } else {
+                    handleDisconnectWallet();
+                }
+            });
+        }
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, []);
+
+    // Dropdown logic
     useEffect(() => {
         if (showDropdown) {
             document.addEventListener('mousedown', handleClickOutside);
@@ -53,6 +75,7 @@ const HeaderComponent = ({
         };
     }, [showDropdown]);
 
+    // Close dropdown when clicking outside
     const handleClickOutside = (event) => {
         if (
             dropdownRef.current &&
@@ -62,6 +85,7 @@ const HeaderComponent = ({
         }
     };
 
+    // Connect wallet
     const handleConnectWallet = async () => {
         const userSignature = await connectWallet();
         if (userSignature) {
@@ -70,6 +94,7 @@ const HeaderComponent = ({
         }
     };
 
+    // Disconnect wallet
     const handleDisconnectWallet = async () => {
         await disconnectWallet();
         setIsConnected(false);
@@ -79,32 +104,10 @@ const HeaderComponent = ({
         location.state.signer = '';
     };
 
-    const handleGetCitizens = async () => {
-        setNfts([]);
-        setLoading(true);
-
-        let wallet = searchInputRef.current.value.toString();
-        if (wallet) {
-            const outArray = await getCitizenForWallet(wallet);
-
-            setNfts(outArray);
-            setLoading(false);
-        }
-    };
-
     return (
         <Header>
             <Title>Neo Tokyo Lore Generator</Title>
-            <SearchContainer>
-                <SearchBar
-                    ref={searchInputRef}
-                    type="text"
-                    placeholder="Search by ENS or Address"
-                />
-                <SearchButton onClick={handleGetCitizens}>
-                    Load NFTs
-                </SearchButton>
-            </SearchContainer>
+            <SearchContainer setNfts={setNfts} setLoading={setLoading} />
             <WalletContainer ref={dropdownRef}>
                 <WalletButton
                     onClick={
@@ -154,44 +157,44 @@ const Title = styled.h1`
     margin: 0;
 `;
 
-const SearchBar = styled.input`
-    padding: 10px;
-    font-size: 1em;
-    border: 2px solid #8a2be2;
-    border-radius: 10px;
-    background-color: #2a2a2a;
-    color: white;
-    outline: none;
-    width: 200px;
-    transition: all 0.3s ease;
+// const SearchBar = styled.input`
+//     padding: 10px;
+//     font-size: 1em;
+//     border: 2px solid #8a2be2;
+//     border-radius: 10px;
+//     background-color: #2a2a2a;
+//     color: white;
+//     outline: none;
+//     width: 200px;
+//     transition: all 0.3s ease;
 
-    &:focus {
-        box-shadow: 0 0 10px #8a2be2;
-    }
-`;
+//     &:focus {
+//         box-shadow: 0 0 10px #8a2be2;
+//     }
+// `;
 
-const SearchButton = styled.button`
-    padding: 10px 20px;
-    font-size: 1em;
-    color: #ffffff;
-    background-color: #8a2be2;
-    border: none;
-    border-radius: 10px;
-    cursor: pointer;
-    transition: background-color 0.3s ease, box-shadow 0.3s ease;
+// const SearchButton = styled.button`
+//     padding: 10px 20px;
+//     font-size: 1em;
+//     color: #ffffff;
+//     background-color: #8a2be2;
+//     border: none;
+//     border-radius: 10px;
+//     cursor: pointer;
+//     transition: background-color 0.3s ease, box-shadow 0.3s ease;
 
-    &:hover {
-        background-color: #7a1ed2;
-        box-shadow: 0 0 10px #7a1ed2;
-    }
-`;
+//     &:hover {
+//         background-color: #7a1ed2;
+//         box-shadow: 0 0 10px #7a1ed2;
+//     }
+// `;
 
-const SearchContainer = styled.div`
-    display: flex;
-    flex-grow: 1;
-    justify-content: center;
-    flex-direction: row;
-`;
+// const SearchContainer = styled.div`
+//     display: flex;
+//     flex-grow: 1;
+//     justify-content: center;
+//     flex-direction: row;
+// `;
 
 const WalletContainer = styled.div`
     display: flex;

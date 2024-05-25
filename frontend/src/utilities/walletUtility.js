@@ -1,9 +1,7 @@
 import { JsonRpcSigner, ethers } from 'ethers';
-import { useLocation } from 'react-router-dom';
 
 export async function connectWallet() {
     let provider;
-    let signer = null;
 
     if (window.ethereum == null) {
         console.log('MetaMask not installed; using read-only defaults');
@@ -28,10 +26,18 @@ export async function connectWallet() {
     }
 }
 
+export async function disconnectWallet() {
+    removeLocalStoredAddress();
+}
+
+export const formatAddress = (address) => {
+    return `${address.slice(0, 7)}...${address.slice(-5)}`;
+};
+
 async function getSigner(provider) {
     let localAddress = window.localStorage.getItem('walletAddress');
     if (localAddress) {
-        return new JsonRpcSigner(localAddress, localAddress);
+        return new JsonRpcSigner(provider, localAddress);
     } else {
         return await provider.getSigner();
     }
@@ -41,11 +47,6 @@ async function setLocalStoredAddress(address) {
     window.localStorage.setItem('walletAddress', address);
 }
 
-export async function disconnectWallet() {
+async function removeLocalStoredAddress() {
     window.localStorage.removeItem('walletAddress');
-    // window.location.reload();
 }
-
-export const formatAddress = (address) => {
-    return `${address.slice(0, 6)} ... ${address.slice(-4)}`;
-};

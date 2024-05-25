@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import styled from 'styled-components';
 
+import LoaderComponent from '../Shared/LoaderComponent';
 import { getLoreForCitizen } from '../../services/interfaces';
 
 /**
@@ -12,9 +13,11 @@ import { getLoreForCitizen } from '../../services/interfaces';
  */
 const NftCard = ({ nft }) => {
     const [backstory, setBackstory] = useState(false);
+    const [loading, setLoading] = useState(false);
 
     const handleGenerateBackstory = async () => {
         try {
+            setLoading(true);
             const attributeArray = nft.raw.metadata.attributes;
 
             // Filter out unwanted attributes
@@ -34,6 +37,7 @@ const NftCard = ({ nft }) => {
             let lore = await getLoreForCitizen(citizenInput);
             console.log(lore);
 
+            setLoading(false);
             setBackstory(
                 lore
                     .split('\n')
@@ -43,6 +47,7 @@ const NftCard = ({ nft }) => {
             );
         } catch (error) {
             console.log(error);
+            setLoading(false);
         }
     };
 
@@ -53,11 +58,12 @@ const NftCard = ({ nft }) => {
             </ImageContainer>
             <Details>
                 <p>{nft.name}</p>
-                {!backstory && (
-                    <Button onClick={handleGenerateBackstory}>Who am I?</Button>
-                )}
-                {backstory && (
+                {loading ? (
+                    <LoaderComponent />
+                ) : backstory ? (
                     <BackstoryContainer>{backstory}</BackstoryContainer>
+                ) : (
+                    <Button onClick={handleGenerateBackstory}>Who am I?</Button>
                 )}
             </Details>
         </Card>
