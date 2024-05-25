@@ -2,6 +2,8 @@
 
 -   Added LoaderComponent
 -   Moved SearchContainer to separate component
+-   Moved WalletContainer to separate component
+-   Added helmet, compression, and express-rate-limit to backend server
 
 ### 2024-05-24
 
