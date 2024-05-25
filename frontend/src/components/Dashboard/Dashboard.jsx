@@ -30,9 +30,7 @@ const Dashboard = ({ nfts, setNfts, loading, setLoading }) => {
             <HeaderComponent
                 signerAddress={signer.address}
                 setSigner={setSigner}
-                nfts={nfts}
                 setNfts={setNfts}
-                loading={loading}
                 setLoading={setLoading}
                 walletAddress={walletAddress}
                 setWalletAddress={setWalletAddress}
@@ -76,17 +74,5 @@ const GlobalStyle = createGlobalStyle`
             filter: blur(4px) opacity(0.8);
             z-index: -1;
         }
-    }
-    ${
-        '' /* body {
-        margin: 0;
-        padding: 0;
-        background-image: url('/img/neo-tokyo-mobile.jpeg');
-        background-size: cover;
-        background-repeat: no-repeat;
-        background-attachment: fixed;
-        font-family: 'Roboto', sans-serif;
-        color: white;
-    } */
     }
 `;

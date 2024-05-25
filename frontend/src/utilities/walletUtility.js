@@ -31,6 +31,8 @@ export async function disconnectWallet() {
 }
 
 export const formatAddress = (address) => {
+    if (!address) return 'Ooops! Something went wrong!';
+
     return `${address.slice(0, 7)}...${address.slice(-5)}`;
 };
 

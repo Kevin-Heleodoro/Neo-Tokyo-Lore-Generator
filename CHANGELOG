@@ -1,3 +1,8 @@
+### 2024-05-25
+
+-   Added LoaderComponent
+-   Moved SearchContainer to separate component
+
 ### 2024-05-24
 
 -   Abstracted connectWallet function to walletUtility.js
