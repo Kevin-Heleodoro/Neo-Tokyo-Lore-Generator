@@ -1,15 +1,10 @@
 const dotenv = require('dotenv');
-const helmet = require('helmet');
-const compression = require('compression');
 
 const { app } = require('./server.js');
 
 let envFile =
     process.env.NODE_ENV === 'production' ? '.env' : '.env.development';
 dotenv.config({ path: envFile });
-
-app.use(helmet());
-app.use(compression());
 
 async function main() {
     const port = process.env.SERVER_PORT || 8082;

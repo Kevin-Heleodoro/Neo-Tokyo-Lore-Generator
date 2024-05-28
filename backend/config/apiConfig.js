@@ -5,6 +5,7 @@ const ContractAddresses = {
     NTCTZN: '0xB9951B43802dCF3ef5b14567cb17adF367ed1c0F', // Neo Tokyo Citizen
 };
 
+// Configuration for the OpenAI system
 const OpenAISystemConfig = {
     content:
         'You are a well read story teller specializing in futuristic steampunk literature. One of your main areas of focus is on a world where the city of Neo Tokyo is the central hub of civilization. Neo Tokyo citizens consist of four distinct levels: elite citizens, inner citizens, outer citizens, and meatbags. ' +

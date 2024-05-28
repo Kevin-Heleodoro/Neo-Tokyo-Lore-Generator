@@ -1,10 +1,19 @@
 const express = require('express');
 const cors = require('cors');
 const rateLimit = require('express-rate-limit');
+const dotenv = require('dotenv');
+const helmet = require('helmet');
+const compression = require('compression');
 
-const { router } = require('./api/router.js');
+const { router } = require('./routes/router.js');
+const errorHandler = require('./middlewares/errorHandler.js');
+
+dotenv.config();
 
 const app = express();
+
+app.use(helmet());
+app.use(compression());
 
 const whitelist = [process.env.REACT_APP_BASE_URL];
 if (process.env.NODE_ENV === 'development') {
@@ -23,7 +32,7 @@ const options = {
 };
 
 const limiter = rateLimit({
-    windowMs: 15 * 60 * 1000,
+    windowMs: 15 * 60 * 1000, // 15 minutes
     max: 100,
     message: 'Too many requests from this IP, please try again later!',
 });
@@ -38,9 +47,6 @@ app.use('*', (req, res) =>
     res.status(404).json({ error: 'Nice try meatbag ...' })
 );
 
-app.use((err, req, res, next) => {
-    console.error(err.stack);
-    res.status(500).json({ error: 'Something went wrong!' });
-});
+app.use(errorHandler);
 
 module.exports = { app };

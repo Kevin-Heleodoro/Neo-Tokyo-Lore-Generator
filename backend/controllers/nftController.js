@@ -1,7 +1,7 @@
 const dotenv = require('dotenv');
 const { Alchemy, Network } = require('alchemy-sdk');
 
-const { ContractAddresses } = require('../../config/apiConfig.js');
+const { ContractAddresses } = require('../config/apiConfig.js');
 
 class NFTController {
     // First attempt at finding a way to reduce the number of times we have to
@@ -94,4 +94,4 @@ class NFTController {
     }
 }
 
-module.exports = { NFTController };
+module.exports = NFTController;
