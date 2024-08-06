@@ -39,7 +39,7 @@ const NftCard = ({ nft }) => {
 
             setLoading(false);
             setBackstory(
-                lore
+                lore.backstory
                     .split('\n')
                     .map((paragraph, index) => (
                         <Paragraph key={index}>{paragraph}</Paragraph>

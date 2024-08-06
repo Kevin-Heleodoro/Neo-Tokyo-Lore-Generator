@@ -1,3 +1,12 @@
+### 2024-05-27
+
+-   Moved aiController to controllers folder
+-   Moved router to routes folder
+-   Created services folder for aiService
+-   Created validators folder for ai validators
+-   Created middlewares folder for error handler
+-   Created models folder for Citizen and nftModel
+
 ### 2024-05-25
 
 -   Added LoaderComponent

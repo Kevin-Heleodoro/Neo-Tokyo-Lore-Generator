@@ -42,12 +42,6 @@ The idea behind this app is a fun project that will allow a Neo Tokyo citizen to
 -   an ai model that can generate new image based on prompts (bing, dall-e)
 -   ai api to create a back story for a user based on features from the metadata of the citizen.
 
-## Applications
-
-[Frontend](./frontend/README.md)
-[Middleware](./middleware/README.md)
-[Backend](./backend/README.md)
-
 ## Resources
 
 [OpenAI Quickstart Guide](https://platform.openai.com/docs/quickstart?context=node)
