@@ -23,7 +23,7 @@ if (process.env.NODE_ENV === 'development') {
     whitelist.push('http://localhost:3000');
 }
 
-const corsOptions = {
+const options = {
     origin: (origin, callback) => {
         console.log(`Incoming request from origin: ${origin}`); // Add this line
         if (whitelist.includes(origin) || !origin) {

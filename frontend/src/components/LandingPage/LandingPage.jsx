@@ -48,25 +48,17 @@ const PageContainer = styled.div`
 `;
 
 const ConnectButton = styled.button`
-    padding: 20px 30px;
+    padding: 30px 40px;
     font-size: 1.75em;
-    color: white;
-    background-color: #ab68ff;
-    border: 2px solid white;
-    border-radius: 30px;
+    color: #ffffff;
+    background-color: #8a2be2;
+    border: none;
+    border-radius: 10px;
     cursor: pointer;
-    transition: background-color 0.5s, color 0.5s;
+    transition: background-color 0.3s ease, box-shadow 0.3s ease;
 
     &:hover {
-        background-color: white;
-        border-color: #ab68ff;
-        color: black;
-        box-shadow: 0 0 15px #ffffff;
-
-        &::before {
-            width: 120%;
-            height: 120%;
-            opacity: 1;
-        }
+        background-color: #7a1ed2;
+        box-shadow: 0 0 10px #7a1ed2;
     }
 `;
