@@ -28,7 +28,7 @@ jobs:
               uses: docker/build-push-action@v6
               with:
                   push: true
-                  tags: ${{ secrets.DOCKER_USERNAME }}/neo-tokyo-lore-generator-backend:latest
+                  tags: goldensun/neo-tokyo-lore-generator-backend:latest
               # run: |
               #     docker buildx build --platform linux/amd64,linux/arm64 -t ${{ secrets.DOCKER_USERNAME }}/neo-tokyo-lore-generator-backend:latest --push ./backend
 
@@ -53,6 +53,6 @@ jobs:
               uses: docker/build-push-action@v6
               with:
                   push: true
-                  tags: ${{ secrets.DOCKER_USERNAME }}/neo-tokyo-lore-generator-frontend:latest
+                  tags: goldensun/neo-tokyo-lore-generator-frontend:latest
               # run: |
               #     docker buildx build --platform linux/amd64,linux/arm64 -t ${{ secrets.DOCKER_USERNAME }}/neo-tokyo-lore-generator-frontend:latest --push ./frontend
