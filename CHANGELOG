@@ -1,3 +1,8 @@
+### 2024-08-6
+
+-   Added github actions
+-   Began testing deployment to Render
+
 ### 2024-05-27
 
 -   Moved aiController to controllers folder

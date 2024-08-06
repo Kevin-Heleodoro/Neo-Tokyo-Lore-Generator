@@ -2,9 +2,9 @@
 
 ## The Citadel is watching ...
 
-The idea behind this app is a fun project that will allow a Neo Tokyo citizen to connect to the app and have their citizen automatically re-imagined with different art styles.
+The idea behind this app is a fun project that will allow a Neo Tokyo citizen to connect to the app and generate a backstory for their citizen based on the citizen's attributes.
 
-## Get Started
+## Get Started Locally
 
 1. Create a `.env.development` within the `/frontend` and `/backend` directories.
 2. Start backend server with command: `npm run dev`
@@ -43,6 +43,7 @@ The idea behind this app is a fun project that will allow a Neo Tokyo citizen to
     -   Is this even necessary since we have the "traits" within the metadata?
 -   an ai model that can generate new image based on prompts (bing, dall-e)
 -   ai api to create a back story for a user based on features from the metadata of the citizen.
+-   have their citizen automatically re-imagined with different art styles.
 
 ## Resources
 

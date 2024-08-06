@@ -23,15 +23,17 @@ if (process.env.NODE_ENV === 'development') {
     whitelist.push('http://localhost:3000');
 }
 
-const options = {
+const corsOptions = {
     origin: (origin, callback) => {
-        if (whitelist.indexOf(origin) !== -1 || !origin) {
+        console.log(`Incoming request from origin: ${origin}`); // Add this line
+        if (whitelist.includes(origin) || !origin) {
             callback(null, true);
         } else {
+            console.error(`Blocked by CORS: ${origin}`);
             callback(new Error('Not allowed by CORS'));
         }
     },
-    optionSuccessStatus: 200,
+    optionsSuccessStatus: 200,
 };
 
 const limiter = rateLimit({
