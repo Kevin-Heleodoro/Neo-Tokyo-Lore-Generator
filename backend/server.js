@@ -30,17 +30,20 @@ console.log(`Whitelist: ${whitelist}`);
 const options = {
     origin: (origin, callback) => {
         console.log(`Incoming request from origin: ${origin}`);
-        if (whitelist.includes(origin) || !origin) {
+        if (
+            whitelist.some((allowedOrigin) => allowedOrigin === origin) ||
+            !origin
+        ) {
             callback(null, true);
         } else {
             console.error(`Blocked by CORS: ${origin}`);
             callback(new Error('Not allowed by CORS'));
         }
     },
-    methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'], // Allowed methods
-    allowedHeaders: ['Content-Type', 'Authorization'], // Allowed headers
-    optionsSuccessStatus: 204, // Some legacy browsers (IE11, various SmartTVs) choke on 204
-    credentials: true, // Allow credentials if needed
+    methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
+    allowedHeaders: ['Content-Type', 'Authorization'],
+    optionsSuccessStatus: 204,
+    credentials: true,
 };
 
 const limiter = rateLimit({
