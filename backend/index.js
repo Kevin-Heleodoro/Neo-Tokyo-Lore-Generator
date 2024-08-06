@@ -8,9 +8,10 @@ dotenv.config({ path: envFile });
 
 async function main() {
     const port = process.env.SERVER_PORT || 8082;
+    let server;
 
     try {
-        app.listen(port, () => {
+        server = app.listen(port, () => {
             console.log(`Server running on port ${port}`);
         });
     } catch (e) {
@@ -21,7 +22,7 @@ async function main() {
     // Graceful shutdown
     process.on('SIGTERM', () => {
         console.info('SIGTERM signal received. Closing HTTP server.');
-        app.close(() => {
+        server.close(() => {
             console.info('HTTP server closed.');
             process.exit(0);
         });
@@ -29,7 +30,7 @@ async function main() {
 
     process.on('SIGINT', () => {
         console.info('SIGINT signal received. Closing HTTP server.');
-        app.close(() => {
+        server.close(() => {
             console.info('HTTP server closed.');
             process.exit(0);
         });

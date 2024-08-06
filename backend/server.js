@@ -10,6 +10,9 @@ const errorHandler = require('./middlewares/errorHandler.js');
 
 dotenv.config();
 
+// Debugging: Log the loaded environment variables
+console.log('REACT_APP_BASE_URL:', process.env.REACT_APP_BASE_URL);
+
 const app = express();
 
 app.use(helmet());
@@ -32,8 +35,8 @@ const options = {
 };
 
 const limiter = rateLimit({
-    windowMs: 15 * 60 * 1000, // 15 minutes
-    max: 100,
+    windowMs: 5 * 60 * 1000, // 5 minutes
+    max: 10,
     message: 'Too many requests from this IP, please try again later!',
 });
 
