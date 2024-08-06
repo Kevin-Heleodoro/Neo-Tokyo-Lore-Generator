@@ -11,6 +11,8 @@ const errorHandler = require('./middlewares/errorHandler.js');
 dotenv.config();
 
 // Debugging: Log the loaded environment variables
+console.log('NODE_ENV:', process.env.NODE_ENV);
+console.log('SERVER_PORT:', process.env.SERVER_PORT);
 console.log('REACT_APP_BASE_URL:', process.env.REACT_APP_BASE_URL);
 
 const app = express();
@@ -23,9 +25,11 @@ if (process.env.NODE_ENV === 'development') {
     whitelist.push('http://localhost:3000');
 }
 
+console.log(`Whitelist: ${whitelist}`);
+
 const options = {
     origin: (origin, callback) => {
-        console.log(`Incoming request from origin: ${origin}`); // Add this line
+        console.log(`Incoming request from origin: ${origin}`);
         if (whitelist.includes(origin) || !origin) {
             callback(null, true);
         } else {
@@ -33,7 +37,10 @@ const options = {
             callback(new Error('Not allowed by CORS'));
         }
     },
-    optionsSuccessStatus: 200,
+    methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'], // Allowed methods
+    allowedHeaders: ['Content-Type', 'Authorization'], // Allowed headers
+    optionsSuccessStatus: 204, // Some legacy browsers (IE11, various SmartTVs) choke on 204
+    credentials: true, // Allow credentials if needed
 };
 
 const limiter = rateLimit({

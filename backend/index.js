@@ -2,9 +2,13 @@ const dotenv = require('dotenv');
 
 const { app } = require('./server.js');
 
-let envFile =
-    process.env.NODE_ENV === 'production' ? '.env' : '.env.development';
-dotenv.config({ path: envFile });
+if (process.env.NODE_ENV !== 'production') {
+    let envFile =
+        process.env.NODE_ENV === 'development' ? '.env.development' : '.env';
+    dotenv.config({ path: envFile });
+} else {
+    dotenv.config();
+}
 
 async function main() {
     const port = process.env.SERVER_PORT || 8082;
