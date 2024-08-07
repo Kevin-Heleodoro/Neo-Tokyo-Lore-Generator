@@ -123,9 +123,13 @@ export default WalletContainer;
 const WalletBody = styled.div`
     display: flex;
     justify-content: right;
-    ${'' /* justify-content: center; */}
     align-items: center;
     position: relative;
+
+    @media (max-width: 768px) {
+        flex-direction: column;
+        align-items: flex-start;
+    }
 `;
 
 const WalletButton = styled.button`
@@ -146,7 +150,6 @@ const WalletButton = styled.button`
 
 const Dropdown = styled.div`
     position: absolute;
-    ${'' /* position: absolute; */}
     top: calc(100% + 10px);
     right: 0;
     background-color: #2a2a2a;

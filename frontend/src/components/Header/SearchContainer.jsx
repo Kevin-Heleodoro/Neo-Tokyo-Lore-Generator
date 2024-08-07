@@ -21,12 +21,19 @@ const SearchContainer = ({ setNfts, setLoading }) => {
         setLoading(false);
     };
 
+    const handleKeyDown = (event) => {
+        if (event.key === 'Enter') {
+            handleGetCitizens();
+        }
+    };
+
     return (
         <SearchBody>
             <SearchBar
                 ref={searchInputRef}
                 type="text"
                 placeholder="Search by ENS or Address"
+                onKeyDown={handleKeyDown}
             />
             <SearchButton onClick={handleGetCitizens}>Load NFTs</SearchButton>
         </SearchBody>
@@ -44,6 +51,12 @@ const SearchBody = styled.div`
     flex-grow: 1;
     justify-content: center;
     flex-direction: row;
+
+    @media (max-width: 480px) {
+        flex-direction: column;
+        align-items: stretch;
+        width: 100%;
+    }
 `;
 
 const SearchBar = styled.input`
@@ -60,6 +73,11 @@ const SearchBar = styled.input`
     &:focus {
         box-shadow: 0 0 10px #8a2be2;
     }
+
+    @media (max-width: 480px) {
+        width: 100%;
+        margin-bottom: 10px;
+    }
 `;
 
 const SearchButton = styled.button`
@@ -75,5 +93,9 @@ const SearchButton = styled.button`
     &:hover {
         background-color: #7a1ed2;
         box-shadow: 0 0 10px #7a1ed2;
+    }
+
+    @media (max-width: 480px) {
+        width: 100%;
     }
 `;

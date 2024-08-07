@@ -37,6 +37,7 @@ const options = {
             callback(null, true);
         } else {
             console.error(`Blocked by CORS: ${origin}`);
+            console.error(`Allowed origins: ${whitelist}`);
             callback(new Error('Not allowed by CORS'));
         }
     },

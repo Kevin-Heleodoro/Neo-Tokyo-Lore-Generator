@@ -2,6 +2,7 @@ import styled from 'styled-components';
 
 import SearchContainer from './SearchContainer';
 import WalletContainer from './WalletContainer';
+import { Link } from 'react-router-dom';
 
 /**
  * This component is the header for the application. It displays the title, search bar,
@@ -20,7 +21,14 @@ const HeaderComponent = ({
 }) => {
     return (
         <Header>
-            <Title>Neo Tokyo Lore Generator</Title>
+            <Title>
+                <Link
+                    to="/home"
+                    style={{ textDecoration: 'none', color: '#8a2be2' }}
+                >
+                    Neo Tokyo Lore Generator
+                </Link>
+            </Title>
             <SearchContainer setNfts={setNfts} setLoading={setLoading} />
             <WalletContainer
                 isConnected={isConnected}
@@ -44,17 +52,25 @@ const Header = styled.header`
     background-color: #1f1f1f;
     color: white;
     padding: 10px 20px;
-    ${'' /* display: flex; */}
-    display: grid;
-    grid-template-columns: 1fr 2fr 1fr;
-    justify-content: space-evenly;
+    display: flex;
+    justify-content: space-between;
     align-items: center;
     border-bottom: 2px solid #8a2be2;
     box-shadow: 0 0 15px rgba(138, 43, 226, 0.7);
+    flex-wrap: wrap;
+
+    @media (max-width: 768px) {
+        flex-direction: column;
+        align-items: flex-start;
+    }
 `;
 
 const Title = styled.h1`
     font-size: 1.5em;
     color: #8a2be2;
     margin: 0;
+
+    @media (max-width: 768px) {
+        font-size: 1.2em;
+    }
 `;

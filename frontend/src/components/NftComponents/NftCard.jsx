@@ -127,6 +127,12 @@ const BackstoryContainer = styled.div`
     border-radius: 10px;
     background-color: #2a2a2a;
     box-shadow: 0 0 10px rgba(138, 43, 226, 0.7);
+    max-height: 40vh; /* Set maximum height for the lore section */
+    overflow-y: auto; /* Enable vertical scrolling */
+
+    @media (max-width: 480px) {
+        max-height: 150px; /* Adjust max-height for smaller screens */
+    }
 `;
 
 const Paragraph = styled.p`
