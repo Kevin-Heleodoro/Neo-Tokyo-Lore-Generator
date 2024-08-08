@@ -2,24 +2,36 @@ import axios from 'axios';
 
 const BASE_URL = process.env.REACT_APP_API_BASE_URL + 'api/v1';
 
+// Determine if the environment is development or local
+const isDevelopment = process.env.NODE_ENV === 'development';
+const isLocalhost = window.location.hostname === 'localhost';
+
 class AlchemyDataService {
     async getAlchemyInfo(wallet) {
-        console.log('getAlchemyInfo called');
+        if (isDevelopment || isLocalhost) {
+            console.log('getAlchemyInfo called');
+        }
         return axios.post(BASE_URL, { wallet });
     }
 
     async getNFTsForOwner(address) {
-        console.log('getNFTsForOwner called');
+        if (isDevelopment || isLocalhost) {
+            console.log('getNFTsForOwner called');
+        }
         return axios.get(BASE_URL + '/nfts/' + address);
     }
 
     async getCitizenForWallet(address) {
-        console.log('getCitizenForWallet called');
+        if (isDevelopment || isLocalhost) {
+            console.log('getCitizenForWallet called');
+        }
         return axios.get(BASE_URL + '/citizen/' + address);
     }
 
     async getLoreForCitizen(citizen) {
-        console.log('getLoreForCitizen called');
+        if (isDevelopment || isLocalhost) {
+            console.log('getLoreForCitizen called');
+        }
         return axios.post(BASE_URL + '/ai/generate', citizen);
     }
 }

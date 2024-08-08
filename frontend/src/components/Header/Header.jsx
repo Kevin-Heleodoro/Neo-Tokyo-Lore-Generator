@@ -1,8 +1,9 @@
 import styled from 'styled-components';
+import { Link } from 'react-router-dom';
+import { FaBars, FaHome } from 'react-icons/fa';
 
 import SearchContainer from './SearchContainer';
 import WalletContainer from './WalletContainer';
-import { Link } from 'react-router-dom';
 
 /**
  * This component is the header for the application. It displays the title, search bar,

@@ -4,6 +4,10 @@ import styled from 'styled-components';
 import LoaderComponent from '../Shared/LoaderComponent';
 import { getLoreForCitizen } from '../../services/interfaces';
 
+// Determine if the environment is development or local
+const isDevelopment = process.env.NODE_ENV === 'development';
+const isLocalhost = window.location.hostname === 'localhost';
+
 /**
  * This component is a card that displays an NFT object. It displays the NFT's name,
  * image, collection, contract address, token ID, and token type.
@@ -35,7 +39,10 @@ const NftCard = ({ nft }) => {
             };
 
             let lore = await getLoreForCitizen(citizenInput);
-            console.log(lore);
+
+            if (isDevelopment || isLocalhost) {
+                console.log(lore); // Log only in development or localhost
+            }
 
             setLoading(false);
             setBackstory(
@@ -46,7 +53,9 @@ const NftCard = ({ nft }) => {
                     ))
             );
         } catch (error) {
-            console.log(error);
+            if (isDevelopment || isLocalhost) {
+                console.log(error); // Log errors only in development or localhost
+            }
             setLoading(false);
         }
     };

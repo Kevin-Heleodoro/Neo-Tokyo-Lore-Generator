@@ -28,6 +28,7 @@ The idea behind this app is a fun project that will allow a Neo Tokyo citizen to
 -   Resize the favicon
 -   Handle redirecting to `/` when not connected
 -   Handle failed response from server
+-   Add logging for error handling
 
 ### Backend
 
