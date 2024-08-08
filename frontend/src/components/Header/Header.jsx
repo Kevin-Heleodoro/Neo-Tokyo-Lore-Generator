@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 import { Link } from 'react-router-dom';
-import { FaBars, FaHome } from 'react-icons/fa';
+// import { FaBars, FaHome } from 'react-icons/fa';
 
 import SearchContainer from './SearchContainer';
 import WalletContainer from './WalletContainer';

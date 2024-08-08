@@ -1,7 +1,10 @@
 import AlchemyDataService from './alchemy';
 
+const isDevelopment = process.env.NODE_ENV === 'development';
+const isLocalhost = window.location.hostname === 'localhost';
+
 export async function getAlchemyInfo(wallet) {
-    console.log('getAlchemyInfo called');
+    // console.log('getAlchemyInfo called');
     const url = process.env.REACT_APP_API_BASE_URL + 'api';
     const options = {
         method: 'GET',
@@ -12,12 +15,14 @@ export async function getAlchemyInfo(wallet) {
     };
     let response = await fetch(url, options);
     let data = await response.json();
-    console.log('getAlchemyInfo data: ' + data);
+    if (isDevelopment || isLocalhost) {
+        console.log('getAlchemyInfo data: ' + data);
+    }
     return data;
 }
 
 export async function getNFTsForOwner(address) {
-    console.log('getNFTsForOwner called');
+    // console.log('getNFTsForOwner called');
     const url = process.env.REACT_APP_API_BASE_URL + 'api/nfts/' + address;
     console.log({ url });
     const options = {
@@ -26,10 +31,14 @@ export async function getNFTsForOwner(address) {
             'Content-Type': 'application/json',
         },
     };
-    console.log({ options });
+    if (isDevelopment || isLocalhost) {
+        console.log({ options });
+    }
     let response = await fetch(url, options);
     let data = await response.json();
-    console.log('getNFTsForOwner data: ' + data);
+    if (isDevelopment || isLocalhost) {
+        console.log('getNFTsForOwner data: ' + data);
+    }
     return data;
 }
 
@@ -47,10 +56,16 @@ export async function getCitizenForWallet(wallet) {
     await AlchemyDataService.getCitizenForWallet(wallet)
         .then((response) => {
             nftData = response.data;
-            console.log(nftData);
+            if (isDevelopment || isLocalhost) {
+                console.log(nftData);
+            }
         })
         .catch((e) => {
-            console.log(e);
+            if (isDevelopment || isLocalhost) {
+                console.log(e);
+            } else {
+                console.log('There was an error fetching the citizen data.');
+            }
             return '';
         });
 
@@ -84,11 +99,17 @@ export async function getLoreForCitizen(citizen) {
 
     await AlchemyDataService.getLoreForCitizen(citizen)
         .then((response) => {
-            console.log(response.data);
+            if (isDevelopment || isLocalhost) {
+                console.log(response.data);
+            }
             result = response.data;
         })
         .catch((e) => {
-            console.log(e);
+            if (isDevelopment || isLocalhost) {
+                console.log(e);
+            } else {
+                console.log('There was an error fetching the lore data.');
+            }
             return '';
         });
 
