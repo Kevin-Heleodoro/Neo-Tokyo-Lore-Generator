@@ -3,23 +3,13 @@ import { Link } from 'react-router-dom';
 // import { FaBars, FaHome } from 'react-icons/fa';
 
 import SearchContainer from './SearchContainer';
-import WalletContainer from './WalletContainer';
 
 /**
  * This component is the header for the application. It displays the title, search bar,
  * and wallet connection button. It also handles the logic for connecting and disconnecting
  * the wallet.
  */
-const HeaderComponent = ({
-    signerAddress,
-    setNfts,
-    setLoading,
-    isConnected,
-    setIsConnected,
-    walletAddress,
-    setWalletAddress,
-    setSigner,
-}) => {
+const HeaderComponent = ({ setNfts, setLoading }) => {
     return (
         <Header>
             <Title>
@@ -31,14 +21,6 @@ const HeaderComponent = ({
                 </Link>
             </Title>
             <SearchContainer setNfts={setNfts} setLoading={setLoading} />
-            <WalletContainer
-                isConnected={isConnected}
-                walletAddress={walletAddress}
-                signerAddress={signerAddress}
-                setSigner={setSigner}
-                setIsConnected={setIsConnected}
-                setWalletAddress={setWalletAddress}
-            />
         </Header>
     );
 };

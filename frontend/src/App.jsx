@@ -9,7 +9,7 @@ import ErrorPage from './components/Error/ErrorPage';
 export default function App() {
     const [nfts, setNfts] = useState([]);
     const [loading, setLoading] = useState(false);
-    const [isWalletConnected, setIsWalletConnected] = useState(false);
+    // const [isWalletConnected, setIsWalletConnected] = useState(false);
 
     return (
         <ErrorBoundary>
@@ -19,7 +19,7 @@ export default function App() {
                     path="/"
                     element={
                         <LandingPage
-                            setIsWalletConnected={setIsWalletConnected}
+                        // setIsWalletConnected={setIsWalletConnected}
                         />
                     }
                 />
@@ -31,7 +31,7 @@ export default function App() {
                             setNfts={setNfts}
                             loading={loading}
                             setLoading={setLoading}
-                            isWalletConnected={isWalletConnected}
+                            // isWalletConnected={isWalletConnected}
                         />
                     }
                 />

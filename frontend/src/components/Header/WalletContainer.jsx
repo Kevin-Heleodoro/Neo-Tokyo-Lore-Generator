@@ -21,34 +21,34 @@ const WalletContainer = ({
     const [showDropdown, setShowDropdown] = useState(false);
 
     // Detect if wallet is already connected
-    useEffect(() => {
-        if (signerAddress) {
-            setWalletAddress(formatAddress(signerAddress));
-        }
+    // useEffect(() => {
+    //     if (signerAddress) {
+    //         setWalletAddress(formatAddress(signerAddress));
+    //     }
 
-        if (location.state.signer) {
-            setWalletAddress(formatAddress(location.state.signer.address));
-        }
+    //     // if (location.state.signer) {
+    //     //     setWalletAddress(formatAddress(location.state.signer.address));
+    //     // }
 
-        // Cannot set isWalletConnected here to false because it will disconnect everytime the page loads.
+    //     // Cannot set isWalletConnected here to false because it will disconnect everytime the page loads.
 
-        // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, []);
+    //     // eslint-disable-next-line react-hooks/exhaustive-deps
+    // }, []);
 
     // Detect wallet change
-    useEffect(() => {
-        if (window.ethereum) {
-            window.ethereum.on('accountsChanged', (accounts) => {
-                if (accounts.length > 0) {
-                    setWalletAddress(formatAddress(accounts[0]));
-                    localStorage.setItem('walletAddress', accounts[0]);
-                } else {
-                    handleDisconnectWallet();
-                }
-            });
-        }
-        // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, []);
+    // useEffect(() => {
+    //     if (window.ethereum) {
+    //         window.ethereum.on('accountsChanged', (accounts) => {
+    //             if (accounts.length > 0) {
+    //                 setWalletAddress(formatAddress(accounts[0]));
+    //                 localStorage.setItem('walletAddress', accounts[0]);
+    //             } else {
+    //                 handleDisconnectWallet();
+    //             }
+    //         });
+    //     }
+    //     // eslint-disable-next-line react-hooks/exhaustive-deps
+    // }, []);
 
     // Dropdown logic
     useEffect(() => {

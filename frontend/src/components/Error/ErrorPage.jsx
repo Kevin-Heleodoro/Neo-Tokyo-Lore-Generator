@@ -3,6 +3,35 @@ import styled from 'styled-components';
 
 import { ErrorContext } from './ErrorContext';
 
+export default function ErrorPage({ is404 = false }) {
+    const error = useContext(ErrorContext);
+
+    const title = is404 ? '404' : 'Oops!';
+    const errorStatus = is404 ? '' : error ? error.status : '';
+    const message = is404
+        ? 'The page you are looking for does not exist.'
+        : 'An unexpected error has occurred ... most likely your fault.';
+    const errorDetail = is404
+        ? 'You may have mistyped the address or the page may have moved.'
+        : error
+        ? error.statusText || error.message
+        : '... very little';
+
+    return (
+        <PageContainer>
+            <ErrorContainer id="error-page">
+                <ErrorTitle>{title}</ErrorTitle>
+                <ErrorStatus>{errorStatus}</ErrorStatus>
+                <ErrorMessage>{message}</ErrorMessage>
+                <ErrorMessage>Here's what we know:</ErrorMessage>
+                <ErrorMessage>
+                    <i>{errorDetail}</i>
+                </ErrorMessage>
+            </ErrorContainer>
+        </PageContainer>
+    );
+}
+
 const PageContainer = styled.div`
     display: flex;
     justify-content: center;
@@ -44,32 +73,3 @@ const ErrorMessage = styled.p`
     margin: 0.5rem;
     color: #ffffff; // White text for messages
 `;
-
-export default function ErrorPage({ is404 = false }) {
-    const error = useContext(ErrorContext);
-
-    const title = is404 ? '404' : 'Oops!';
-    const errorStatus = is404 ? '' : error ? error.status : '';
-    const message = is404
-        ? 'The page you are looking for does not exist.'
-        : 'An unexpected error has occurred ... most likely your fault.';
-    const errorDetail = is404
-        ? 'You may have mistyped the address or the page may have moved.'
-        : error
-        ? error.statusText || error.message
-        : '... very little';
-
-    return (
-        <PageContainer>
-            <ErrorContainer id="error-page">
-                <ErrorTitle>{title}</ErrorTitle>
-                <ErrorStatus>{errorStatus}</ErrorStatus>
-                <ErrorMessage>{message}</ErrorMessage>
-                <ErrorMessage>Here's what we know:</ErrorMessage>
-                <ErrorMessage>
-                    <i>{errorDetail}</i>
-                </ErrorMessage>
-            </ErrorContainer>
-        </PageContainer>
-    );
-}
