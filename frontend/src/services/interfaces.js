@@ -4,7 +4,6 @@ const isDevelopment = process.env.NODE_ENV === 'development';
 const isLocalhost = window.location.hostname === 'localhost';
 
 export async function getAlchemyInfo(wallet) {
-    // console.log('getAlchemyInfo called');
     const url = process.env.REACT_APP_API_BASE_URL + 'api';
     const options = {
         method: 'GET',
@@ -22,7 +21,6 @@ export async function getAlchemyInfo(wallet) {
 }
 
 export async function getNFTsForOwner(address) {
-    // console.log('getNFTsForOwner called');
     const url = process.env.REACT_APP_API_BASE_URL + 'api/nfts/' + address;
     console.log({ url });
     const options = {
