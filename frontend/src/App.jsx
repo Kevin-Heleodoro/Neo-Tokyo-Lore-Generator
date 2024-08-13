@@ -9,20 +9,11 @@ import ErrorPage from './components/Error/ErrorPage';
 export default function App() {
     const [nfts, setNfts] = useState([]);
     const [loading, setLoading] = useState(false);
-    // const [isWalletConnected, setIsWalletConnected] = useState(false);
 
     return (
         <ErrorBoundary>
             <Routes>
-                <Route
-                    exact
-                    path="/"
-                    element={
-                        <LandingPage
-                        // setIsWalletConnected={setIsWalletConnected}
-                        />
-                    }
-                />
+                <Route exact path="/" element={<LandingPage />} />
                 <Route
                     path="/home"
                     element={
@@ -31,7 +22,6 @@ export default function App() {
                             setNfts={setNfts}
                             loading={loading}
                             setLoading={setLoading}
-                            // isWalletConnected={isWalletConnected}
                         />
                     }
                 />
