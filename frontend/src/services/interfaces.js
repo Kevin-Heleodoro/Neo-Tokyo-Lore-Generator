@@ -46,12 +46,12 @@ export async function getNFTsForOwner(address) {
  * @param {String} wallet The wallet address to get citizen data for
  * @returns {Array} An array of citizen data
  */
-export async function getCitizenForWallet(wallet) {
+export async function getCitizenByWallet(wallet) {
     let nftData = [];
     const outArray = [];
 
     // Get the citizen(s) for the wallet address
-    await AlchemyDataService.getCitizenForWallet(wallet)
+    await AlchemyDataService.getCitizenByWallet(wallet)
         .then((response) => {
             nftData = response.data;
             if (isDevelopment || isLocalhost) {
@@ -82,6 +82,48 @@ export async function getCitizenForWallet(wallet) {
             outArray.push(nftData);
         }
     });
+
+    return outArray;
+}
+
+export async function getCitizenByTokenId(tokenId, series) {
+    let nftData = [];
+    const outArray = [];
+
+    // Get the citizen(s) by token ID
+    // await AlchemyDataService.getCitizenByTokenId(tokenId, series)
+    //     .then((response) => {
+    //         nftData = response.data;
+    //         if (isDevelopment || isLocalhost) {
+    //             console.log(nftData);
+    //         }
+    //     })
+    //     .catch((e) => {
+    //         if (isDevelopment || isLocalhost) {
+    //             console.log(e);
+    //         } else {
+    //             console.log('There was an error fetching the citizen data.');
+    //         }
+    //         return '';
+    //     });
+
+    // // Filter out spam contracts and add the image URL to the data
+    // nftData.forEach((nft) => {
+    //     if (nft.contract.isSpam === true) return;
+    //     let imagePath = nft.image.originalUrl;
+
+    //     if (imagePath === undefined) {
+    //         return;
+    //     } else {
+    //         let nftData = {
+    //             img: imagePath.replace('ipfs://', 'https://ipfs.io/ipfs/'),
+    //             ...nft,
+    //         };
+    //         outArray.push(nftData);
+    //     }
+    // });
+
+    console.log('called getCitizenByTokenId');
 
     return outArray;
 }
