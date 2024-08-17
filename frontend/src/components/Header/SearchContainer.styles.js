@@ -57,12 +57,12 @@ export const SearchButton = styled.button`
 
 export const DropdownWrapper = styled.div`
     position: relative;
-    margin-right: 10px;
+    display: inline-block;
 `;
 
 export const DropdownButton = styled.button`
-    padding: 0.3rem;
-    font-size: 1rem;
+    padding: 10px 5px;
+    font-size: 1em;
     color: #ffffff;
     background-color: #8a2be2;
     border-left: 1px solid #1f1f1f;
@@ -77,16 +77,17 @@ export const DropdownButton = styled.button`
 `;
 
 export const DropdownMenu = styled.ul`
+    display: ${({ open }) => (open ? 'block' : 'none')};
     list-style: none;
-    margin: 0;
-    padding: 0;
+    margin: 10px;
+    padding: 10px 0px;
     background-color: #2a2a2a;
-    border-radius: 10px;
+    border-radius: 0px 0px 10px 10px;
     position: absolute;
-    top: 50px;
+    top: 100%;
     left: 0;
-    min-width: 120px;
-    z-index: 10;
+    width: auto;
+    z-index: 50;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
 
     li {
@@ -109,9 +110,9 @@ export const SubDropdown = styled.ul`
     border-radius: 10px;
     position: absolute;
     top: 0;
-    left: 120px;
+    left: 100%;
     min-width: 80px;
-    z-index: 20;
+    z-index: 50;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
 
     li {
@@ -128,7 +129,7 @@ export const SubDropdown = styled.ul`
 
 export const SearchButtonWrapper = styled.div`
     display: flex;
-    overflow: hidden;
+    position: relative;
 
     @media (max-width: 480px) {
         width: 100%;
