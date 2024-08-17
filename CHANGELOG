@@ -1,3 +1,8 @@
+### 2024-08-16
+
+-   Added ability to select either token or wallet to search by.
+-   Initial mobile responsiveness implemented
+
 ### 2024-08-6
 
 -   Added github actions
