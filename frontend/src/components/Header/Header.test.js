@@ -1,7 +1,7 @@
 import React from 'react';
 import { render, screen, fireEvent } from '@testing-library/react';
 import { BrowserRouter as Router } from 'react-router-dom';
-import HeaderComponent from './HeaderComponent';
+import Header from './Header';
 
 // Mock the SearchContainer component
 jest.mock('./SearchContainer', () => () => <div>SearchContainer Mock</div>);
@@ -10,7 +10,7 @@ describe('HeaderComponent', () => {
     test('renders the header with title and search container', () => {
         render(
             <Router>
-                <HeaderComponent setNfts={jest.fn()} setLoading={jest.fn()} />
+                <Header setNfts={jest.fn()} setLoading={jest.fn()} />
             </Router>
         );
 
@@ -24,7 +24,7 @@ describe('HeaderComponent', () => {
     test('toggles the hamburger menu and displays MobileSearchContainer', () => {
         render(
             <Router>
-                <HeaderComponent setNfts={jest.fn()} setLoading={jest.fn()} />
+                <Header setNfts={jest.fn()} setLoading={jest.fn()} />
             </Router>
         );
 
@@ -51,7 +51,7 @@ describe('HeaderComponent', () => {
     test('MobileSearchContainer is not displayed on desktop screens', () => {
         render(
             <Router>
-                <HeaderComponent setNfts={jest.fn()} setLoading={jest.fn()} />
+                <Header setNfts={jest.fn()} setLoading={jest.fn()} />
             </Router>
         );
 

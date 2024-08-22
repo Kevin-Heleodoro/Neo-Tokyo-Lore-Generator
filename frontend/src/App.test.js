@@ -2,7 +2,7 @@
 import React from 'react';
 import { render, screen } from '@testing-library/react';
 import { MemoryRouter } from 'react-router-dom';
-import '@testing-library/jest-dom/extend-expect';
+// import '@testing-library/jest-dom/extend-expect';
 import App from './App';
 // import LandingPage from './components/LandingPage/LandingPage';
 // import Dashboard from './components/Dashboard/Dashboard';
