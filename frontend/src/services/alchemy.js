@@ -25,14 +25,14 @@ class AlchemyDataService {
         if (isDevelopment || isLocalhost) {
             console.log('getCitizenByWallet called');
         }
-        return axios.get(BASE_URL + '/citizen/' + address);
+        return axios.get(BASE_URL + '/citizen/wallet/' + address);
     }
 
     async getCitizenByTokenId(tokenId, series) {
         if (isDevelopment || isLocalhost) {
             console.log('getCitizenByTokenId called');
         }
-        return axios.get(BASE_URL + '/citizen/' + tokenId + '/' + series);
+        return axios.get(BASE_URL + '/citizen/id/' + tokenId + '/' + series);
     }
 
     async getLoreForCitizen(citizen) {

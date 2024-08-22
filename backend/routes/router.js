@@ -20,8 +20,12 @@ router
     .get(validateAddress, NFTController.apiGetNFTsForOwner);
 
 router
-    .route('/citizen/:address')
-    .get(validateAddress, NFTController.apiGetOwnersCitizen);
+    .route('/citizen/wallet/:address')
+    .get(validateAddress, NFTController.getCitizenByWallet);
+
+router
+    .route('/citizen/id/:tokenId/:series')
+    .get(NFTController.getCitizenByTokenId);
 
 router
     .route('/ai/generate')

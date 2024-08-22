@@ -57,7 +57,7 @@ class NFTController {
     // This function is used to get the citizen for a given address. It will
     // return an array of NFTs that are owned by the address and are from
     // ContractAddresses.
-    static async apiGetOwnersCitizen(req, res) {
+    static async getCitizenByWallet(req, res) {
         const config = {
             apiKey: process.env.ALCHEMY_API_KEY,
             network: Network.Mainnet,
@@ -89,6 +89,42 @@ class NFTController {
             res.status(500).json({
                 error: error,
                 message: `Failed to get citizen for owner ${address} ... meatbag!`,
+            });
+        }
+    }
+
+    static async getCitizenByTokenId(req, res) {
+        const config = {
+            apiKey: process.env.ALCHEMY_API_KEY,
+            network: Network.Mainnet,
+        };
+        const alchemy = new Alchemy(config);
+        const tokenId = req.params.tokenId;
+        const series = req.params.series;
+        let contract;
+
+        if (series === 'S1') {
+            contract = ContractAddresses.NTCTZN;
+        } else if (series === 'S2') {
+            contract = ContractAddresses.NTOCTZN;
+        } else {
+            res.status(400).json({
+                message: `Invalid series ${series}`,
+            });
+            return;
+        }
+
+        try {
+            console.log(
+                `Request for tokenId: ${tokenId}, series: ${series}, contract: ${contract}`
+            );
+            const nft = await alchemy.nft.getNftMetadata(contract, tokenId);
+            res.json(nft);
+        } catch (error) {
+            console.log(error);
+            res.status(500).json({
+                error: error,
+                message: `Failed to get citizen for owner ${tokenId} ... meatbag!`,
             });
         }
     }

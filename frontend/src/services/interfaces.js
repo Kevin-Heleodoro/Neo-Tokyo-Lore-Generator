@@ -90,24 +90,28 @@ export async function getCitizenByTokenId(tokenId, series) {
     let nftData = [];
     const outArray = [];
 
-    // Get the citizen(s) by token ID
-    // await AlchemyDataService.getCitizenByTokenId(tokenId, series)
-    //     .then((response) => {
-    //         nftData = response.data;
-    //         if (isDevelopment || isLocalhost) {
-    //             console.log(nftData);
-    //         }
-    //     })
-    //     .catch((e) => {
-    //         if (isDevelopment || isLocalhost) {
-    //             console.log(e);
-    //         } else {
-    //             console.log('There was an error fetching the citizen data.');
-    //         }
-    //         return '';
-    //     });
+    if (isDevelopment || isLocalhost) {
+        console.log(`tokenId: ${tokenId}, series: ${series}`);
+    }
 
-    // // Filter out spam contracts and add the image URL to the data
+    // Get the citizen(s) by token ID
+    await AlchemyDataService.getCitizenByTokenId(tokenId, series)
+        .then((response) => {
+            nftData = response.data;
+            if (isDevelopment || isLocalhost) {
+                console.log(nftData);
+            }
+        })
+        .catch((e) => {
+            if (isDevelopment || isLocalhost) {
+                console.log(e);
+            } else {
+                console.log('There was an error fetching the citizen data.');
+            }
+            return '';
+        });
+
+    // Filter out spam contracts and add the image URL to the data
     // nftData.forEach((nft) => {
     //     if (nft.contract.isSpam === true) return;
     //     let imagePath = nft.image.originalUrl;
