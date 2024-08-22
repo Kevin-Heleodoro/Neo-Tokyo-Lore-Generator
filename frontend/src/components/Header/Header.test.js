@@ -28,7 +28,7 @@ describe('HeaderComponent', () => {
             </Router>
         );
 
-        const hamburgerMenu = screen.getByRole('button');
+        const hamburgerMenu = screen.getByTestId('hamburger-button');
         const mobileSearchContainer =
             screen.queryByText(/SearchContainer Mock/i);
 

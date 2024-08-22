@@ -33,7 +33,11 @@ const HeaderComponent = ({ setNfts, setLoading }) => {
             <SearchWrapper>
                 <SearchContainer setNfts={setNfts} setLoading={setLoading} />
             </SearchWrapper>
-            <HamburgerMenu onClick={toggleMenu} open={menuOpen}>
+            <HamburgerMenu
+                data-testid="hamburger-button"
+                onClick={toggleMenu}
+                open={menuOpen}
+            >
                 <span></span>
                 <span></span>
                 <span></span>

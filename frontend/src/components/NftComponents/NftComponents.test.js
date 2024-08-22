@@ -1,4 +1,6 @@
 import React from 'react';
+// import { act } from 'react-dom/test-utils';
+import { waitFor } from '@testing-library/react';
 import { render, screen, fireEvent } from '@testing-library/react';
 import NftCard from './NftCard';
 import { getLoreForCitizen } from '../../services/interfaces';
@@ -57,7 +59,9 @@ describe('NftCard Component', () => {
         expect(screen.getByTestId('loader')).toBeInTheDocument();
 
         // Wait for the backstory to be displayed
-        await screen.findByText(/This is the backstory/i);
+        await waitFor(async () => {
+            await screen.findByText(/This is the backstory/i);
+        });
     });
 
     test('displays backstory after generating it', async () => {

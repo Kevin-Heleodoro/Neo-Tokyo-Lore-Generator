@@ -1,9 +1,9 @@
-// LandingPage.test.js
 import React from 'react';
 import { render, screen, fireEvent } from '@testing-library/react';
 import { MemoryRouter } from 'react-router-dom';
-// import '@testing-library/jest-dom/extend-expect';
 import LandingPage from './LandingPage';
+
+const mockedNavigate = jest.fn();
 
 // Mock useNavigate hook from react-router-dom
 jest.mock('react-router-dom', () => ({
@@ -24,8 +24,6 @@ describe('LandingPage Component', () => {
     });
 
     it('navigates to /home when the Enter Citizen button is clicked', () => {
-        const mockedNavigate = jest.fn();
-
         // Mock useNavigate to use the mockedNavigate function
         jest.mock('react-router-dom', () => ({
             ...jest.requireActual('react-router-dom'),
