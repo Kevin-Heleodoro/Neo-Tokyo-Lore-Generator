@@ -83,7 +83,10 @@ const SearchContainer = ({ setNfts, setLoading }) => {
                 <DropdownWrapper>
                     <DropdownButton onClick={toggleDropdown}>▼</DropdownButton>
                     {dropdownOpen && (
-                        <DropdownMenu open={dropdownOpen}>
+                        <DropdownMenu
+                            open={dropdownOpen}
+                            onMouseLeave={() => setDropdownOpen(false)}
+                        >
                             <li
                                 onClick={() => handleSearchTypeSelect('wallet')}
                             >
