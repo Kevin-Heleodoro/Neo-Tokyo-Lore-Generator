@@ -79,30 +79,37 @@ export const DropdownButton = styled.button`
 export const DropdownMenu = styled.ul`
     display: ${({ open }) => (open ? 'block' : 'none')};
     list-style: none;
-    margin: 10px;
+    margin: 0;
     padding: 10px 0px;
     background-color: #2a2a2a;
     border-radius: 0px 0px 10px 10px;
     position: absolute;
     top: 100%;
     left: 0;
-    width: auto;
+    min-width: 100%;
     z-index: 50;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+    white-space: nowrap;
 
     li {
         padding: 10px 20px;
         color: white;
         cursor: pointer;
         transition: background-color 0.3s ease;
+        position: relative;
 
         &:hover {
             background-color: #8a2be2;
+        }
+
+        &:hover > ul {
+            display: block; /* Show sub-dropdown on hover */
         }
     }
 `;
 
 export const SubDropdown = styled.ul`
+    display: none;
     list-style: none;
     margin: 0;
     padding: 0;
@@ -112,6 +119,7 @@ export const SubDropdown = styled.ul`
     top: 0;
     left: 100%;
     min-width: 80px;
+    width: 100%;
     z-index: 50;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
 

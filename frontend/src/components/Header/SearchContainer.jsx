@@ -20,6 +20,7 @@ const SearchContainer = ({ setNfts, setLoading }) => {
     const [searchType, setSearchType] = useState('wallet'); // "wallet" or "token"
     const [series, setSeries] = useState('S1'); // "S1" or "S2"
     const [dropdownOpen, setDropdownOpen] = useState(false);
+    const [subDropdownOpen, setSubDropdownOpen] = useState(false);
 
     // Get citizens for wallet or token
     const handleGetCitizens = async () => {
@@ -48,6 +49,7 @@ const SearchContainer = ({ setNfts, setLoading }) => {
 
     const toggleDropdown = () => {
         setDropdownOpen(!dropdownOpen);
+        setSubDropdownOpen(false); // Close subdropdown when toggling main dropdown
     };
 
     const handleSearchTypeSelect = (type) => {
@@ -55,11 +57,13 @@ const SearchContainer = ({ setNfts, setLoading }) => {
         if (type === 'wallet') {
             setDropdownOpen(false);
         }
+        setSubDropdownOpen(false); // Close subdropdown when selecting a type
     };
 
     const handleSeriesSelect = (type) => {
         setSeries(type);
         setDropdownOpen(false);
+        setSubDropdownOpen(false); // Close subdropdown when selecting a series
     };
 
     return (
@@ -70,7 +74,7 @@ const SearchContainer = ({ setNfts, setLoading }) => {
                 placeholder={
                     searchType === 'wallet'
                         ? 'Search by ENS or Address'
-                        : 'Search by Token ID (' + series + ')'
+                        : `Search by Token ID (${series})`
                 }
                 onKeyDown={handleKeyDown}
             />
@@ -85,23 +89,31 @@ const SearchContainer = ({ setNfts, setLoading }) => {
                             >
                                 Wallet
                             </li>
-                            <li onClick={() => handleSearchTypeSelect('token')}>
-                                Token ID
+                            <li
+                                onMouseEnter={() => setSubDropdownOpen(true)}
+                                onMouseLeave={() => setSubDropdownOpen(false)}
+                                onClick={() => handleSearchTypeSelect('token')}
+                            >
+                                Token ID &gt;
+                                {subDropdownOpen && (
+                                    <SubDropdown>
+                                        <li
+                                            onClick={() =>
+                                                handleSeriesSelect('S1')
+                                            }
+                                        >
+                                            Series 1
+                                        </li>
+                                        <li
+                                            onClick={() =>
+                                                handleSeriesSelect('S2')
+                                            }
+                                        >
+                                            Series 2
+                                        </li>
+                                    </SubDropdown>
+                                )}
                             </li>
-                            {searchType === 'token' && (
-                                <SubDropdown>
-                                    <li
-                                        onClick={() => handleSeriesSelect('S1')}
-                                    >
-                                        Series 1
-                                    </li>
-                                    <li
-                                        onClick={() => handleSeriesSelect('S2')}
-                                    >
-                                        Series 2
-                                    </li>
-                                </SubDropdown>
-                            )}
                         </DropdownMenu>
                     )}
                 </DropdownWrapper>
