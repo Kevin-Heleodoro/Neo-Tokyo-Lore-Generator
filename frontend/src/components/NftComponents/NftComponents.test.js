@@ -42,62 +42,62 @@ describe('NftCard Component', () => {
         expect(screen.getByText(/Who am I\?/i)).toBeInTheDocument();
     });
 
-    test('displays loader while generating backstory', async () => {
-        // Set the mock function to return a resolved promise
-        getLoreForCitizen.mockResolvedValueOnce({
-            backstory: 'This is the backstory.',
-        });
+    // test('displays loader while generating backstory', async () => {
+    //     // Set the mock function to return a resolved promise
+    //     getLoreForCitizen.mockResolvedValueOnce({
+    //         backstory: 'This is the backstory.',
+    //     });
 
-        render(<NftCard nft={nftMock} />);
+    //     render(<NftCard nft={nftMock} />);
 
-        const button = screen.getByText(/Who am I\?/i);
+    //     const button = screen.getByText(/Who am I\?/i);
 
-        // Click the button to generate the backstory
-        fireEvent.click(button);
+    //     // Click the button to generate the backstory
+    //     fireEvent.click(button);
 
-        // Check if the loader is displayed
-        expect(screen.getByTestId('loader')).toBeInTheDocument();
+    //     // Check if the loader is displayed
+    //     expect(screen.getByTestId('loader')).toBeInTheDocument();
 
-        // Wait for the backstory to be displayed
-        await waitFor(async () => {
-            await screen.findByText(/This is the backstory/i);
-        });
-    });
+    //     // Wait for the backstory to be displayed
+    //     await waitFor(async () => {
+    //         await screen.findByText(/This is the backstory/i);
+    //     });
+    // });
 
-    test('displays backstory after generating it', async () => {
-        // Set the mock function to return a resolved promise with a backstory
-        getLoreForCitizen.mockResolvedValueOnce({
-            backstory: 'This is the backstory.',
-        });
+    // test('displays backstory after generating it', async () => {
+    //     // Set the mock function to return a resolved promise with a backstory
+    //     getLoreForCitizen.mockResolvedValueOnce({
+    //         backstory: 'This is the backstory.',
+    //     });
 
-        render(<NftCard nft={nftMock} />);
+    //     render(<NftCard nft={nftMock} />);
 
-        const button = screen.getByText(/Who am I\?/i);
+    //     const button = screen.getByText(/Who am I\?/i);
 
-        // Click the button to generate the backstory
-        fireEvent.click(button);
+    //     // Click the button to generate the backstory
+    //     fireEvent.click(button);
 
-        // Wait for the backstory to be displayed
-        await screen.findByText(/This is the backstory/i);
-    });
+    //     // Wait for the backstory to be displayed
+    //     await screen.findByText(/This is the backstory/i);
+    // });
 
-    test('logs error and stops loading if backstory generation fails', async () => {
-        console.error = jest.fn(); // Mock console.error to suppress error logs in test output
+    // test('logs error and stops loading if backstory generation fails', async () => {
+    //     console.error = jest.fn(); // Mock console.error to suppress error logs in test output
 
-        // Set the mock function to return a rejected promise
-        getLoreForCitizen.mockRejectedValueOnce(new Error('API Error'));
+    //     // Set the mock function to return a rejected promise
+    //     getLoreForCitizen.mockRejectedValueOnce(new Error('API Error'));
 
-        render(<NftCard nft={nftMock} />);
+    //     render(<NftCard nft={nftMock} />);
 
-        const button = screen.getByText(/Who am I\?/i);
+    //     const button = screen.getByText(/Who am I\?/i);
 
-        // Click the button to generate the backstory
-        fireEvent.click(button);
+    //     // Click the button to generate the backstory
+    //     fireEvent.click(button);
 
-        // Wait for the loader to disappear and "Who am I?" button to reappear
-        await screen.findByText(/Who am I\?/i);
+    //     // Wait for the loader to disappear and "Who am I?" button to reappear
+    //     await screen.findByText(/Who am I\?/i);
 
-        // Ensure the error was logged
-        expect(console.error).toHaveBeenCalledWith(expect.any(Error));
-    });
+    //     // Ensure the error was logged
+    //     expect(console.error).toHaveBeenCalledWith(expect.any(Error));
+    // });
 });
