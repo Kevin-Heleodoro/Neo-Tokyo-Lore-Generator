@@ -117,7 +117,20 @@ export async function getCitizenByTokenId(tokenId, series) {
         let imagePath = nft.image.originalUrl;
 
         if (imagePath === undefined) {
+            if (isDevelopment || isLocalhost) {
+                console.log('imagePath is undefined');
+            }
             return;
+        } else if (imagePath.includes('data:image/')) {
+            if (isDevelopment || isLocalhost) {
+                console.log('imagePath is a data URL. Using pngUrl');
+            }
+            let url = nft.image.pngUrl + '?format=png';
+            let nftData = {
+                img: url,
+                ...nft,
+            };
+            outArray.push(nftData);
         } else {
             let nftData = {
                 img: imagePath.replace('ipfs://', 'https://ipfs.io/ipfs/'),
