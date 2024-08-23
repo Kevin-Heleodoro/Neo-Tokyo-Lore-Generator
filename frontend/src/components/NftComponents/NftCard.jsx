@@ -18,6 +18,7 @@ const isLocalhost = window.location.hostname === 'localhost';
 const NftCard = ({ nft }) => {
     const [backstory, setBackstory] = useState(false);
     const [loading, setLoading] = useState(false);
+    console.log(nft);
 
     const handleGenerateBackstory = async () => {
         try {

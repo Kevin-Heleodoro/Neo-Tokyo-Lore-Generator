@@ -34,6 +34,8 @@ const SearchContainer = ({ setNfts, setLoading }) => {
                 setNfts(citizenNfts);
             } else if (searchType === 'token') {
                 const citizenNfts = await getCitizenByTokenId(query, series);
+                // const citizenNfts = citizenNft ? [citizenNft] : [];
+                // console.log(`citizenNfts: ${citizenNfts}`);
                 setNfts(citizenNfts);
             }
         }

@@ -38,7 +38,7 @@ The idea behind this app is a fun project that will allow a Neo Tokyo citizen to
 -   add support for wallet delegation
 -   Reduce number of times the alchemy provider needs to be created
     -   Abstract into the server and pass it into the controller functions?
--   CORS to deployed site
+-   [x] CORS to deployed site
 
 ### AI
 

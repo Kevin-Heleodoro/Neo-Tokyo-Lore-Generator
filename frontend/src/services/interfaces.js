@@ -97,7 +97,7 @@ export async function getCitizenByTokenId(tokenId, series) {
     // Get the citizen(s) by token ID
     await AlchemyDataService.getCitizenByTokenId(tokenId, series)
         .then((response) => {
-            nftData = response.data;
+            nftData.push(response.data);
             if (isDevelopment || isLocalhost) {
                 console.log(nftData);
             }
@@ -112,20 +112,20 @@ export async function getCitizenByTokenId(tokenId, series) {
         });
 
     // Filter out spam contracts and add the image URL to the data
-    // nftData.forEach((nft) => {
-    //     if (nft.contract.isSpam === true) return;
-    //     let imagePath = nft.image.originalUrl;
+    nftData.forEach((nft) => {
+        if (nft.contract.isSpam === true) return;
+        let imagePath = nft.image.originalUrl;
 
-    //     if (imagePath === undefined) {
-    //         return;
-    //     } else {
-    //         let nftData = {
-    //             img: imagePath.replace('ipfs://', 'https://ipfs.io/ipfs/'),
-    //             ...nft,
-    //         };
-    //         outArray.push(nftData);
-    //     }
-    // });
+        if (imagePath === undefined) {
+            return;
+        } else {
+            let nftData = {
+                img: imagePath.replace('ipfs://', 'https://ipfs.io/ipfs/'),
+                ...nft,
+            };
+            outArray.push(nftData);
+        }
+    });
 
     console.log('called getCitizenByTokenId');
 
