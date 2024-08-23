@@ -1,6 +1,4 @@
-import { useEffect, useState } from 'react';
 import { createGlobalStyle } from 'styled-components';
-import { useLocation } from 'react-router-dom';
 
 import NftCardContainer from '../NftComponents/NftCardContainer';
 import HeaderComponent from '../Header/Header';
@@ -11,37 +9,11 @@ import LoaderComponent from '../Shared/LoaderComponent';
  * the NFT card container. It also sets the global styles for the application.
  */
 const Dashboard = ({ nfts, setNfts, loading, setLoading }) => {
-    const location = useLocation();
-    const [isConnected, setIsConnected] = useState(true);
-    const [walletAddress, setWalletAddress] = useState('');
-    const [signer, setSigner] = useState('');
-
-    useEffect(() => {
-        let signer = location.state.signer;
-        if (signer) {
-            setSigner(signer);
-        }
-        // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, []);
-
     return (
         <div id="app">
             <GlobalStyle />
-            <HeaderComponent
-                signerAddress={signer.address}
-                setSigner={setSigner}
-                setNfts={setNfts}
-                setLoading={setLoading}
-                walletAddress={walletAddress}
-                setWalletAddress={setWalletAddress}
-                isConnected={isConnected}
-                setIsConnected={setIsConnected}
-            />
-            {loading ? (
-                <LoaderComponent />
-            ) : (
-                <NftCardContainer nfts={nfts} walletAddress={walletAddress} />
-            )}
+            <HeaderComponent setNfts={setNfts} setLoading={setLoading} />
+            {loading ? <LoaderComponent /> : <NftCardContainer nfts={nfts} />}
         </div>
     );
 };

@@ -14,3 +14,24 @@ const OpenAISystemConfig = {
 };
 
 module.exports = { ContractAddresses, OpenAISystemConfig };
+
+// "The Citizen Lore Initiative aims to collect user-submitted lore that Neo Tokyo citizens have developed about the Citizen assets they own. The Neo Tokyo writing team plans to use these character descriptions / stories in upcoming lore development.
+// If a writer chooses to use your character, they will be in contact to follow up with questions, queries, concerns - and get your approval, before your character is included in the proposed lore.
+
+// *Please keep in mind that thought-provoking and original ideas are more likely to be used. The classic "I'm the hero and the best at what I do" is less likely to be considered.
+
+// Neo Tokyo is a diverse environment with many different corners and cultures, get creative! Make a character that feels natural to you, and get prepared for future role playing events and challenges!
+
+// Lore Origins:
+// Neo Tokyo is a metaverse created to escape the clutches of the UAEC (United Americas, Europe and China), a ‘one-world’ government.
+// Concerned citizens could follow a bread crumb trail gaining pieces of a code that when combined allowed them to upload their minds into the Ether, leaving their bodies behind on Earth.
+
+// Definitions:
+
+// Neo Tokyo - The metaverse reality.
+// UAEC - One world government seeking to control the people, including Neo Tokyo.
+// The Citadel - The central area of Neo Tokyo city around Citadel Tower.
+// Outerlands - A lawless area surrounding Neo Tokyo city.
+// The Hands - A shrouded council of seven, responsible for the inner workings of Neo Tokyo.
+// Citizens - Uploaded individuals with ID access to Neo Tokyo city.
+// Outer Citizens - Uploaded individuals lost to the Outerlands. "

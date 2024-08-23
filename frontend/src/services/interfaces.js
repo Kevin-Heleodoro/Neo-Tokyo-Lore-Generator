@@ -4,7 +4,6 @@ const isDevelopment = process.env.NODE_ENV === 'development';
 const isLocalhost = window.location.hostname === 'localhost';
 
 export async function getAlchemyInfo(wallet) {
-    // console.log('getAlchemyInfo called');
     const url = process.env.REACT_APP_API_BASE_URL + 'api';
     const options = {
         method: 'GET',
@@ -22,7 +21,6 @@ export async function getAlchemyInfo(wallet) {
 }
 
 export async function getNFTsForOwner(address) {
-    // console.log('getNFTsForOwner called');
     const url = process.env.REACT_APP_API_BASE_URL + 'api/nfts/' + address;
     console.log({ url });
     const options = {
@@ -48,12 +46,12 @@ export async function getNFTsForOwner(address) {
  * @param {String} wallet The wallet address to get citizen data for
  * @returns {Array} An array of citizen data
  */
-export async function getCitizenForWallet(wallet) {
+export async function getCitizenByWallet(wallet) {
     let nftData = [];
     const outArray = [];
 
     // Get the citizen(s) for the wallet address
-    await AlchemyDataService.getCitizenForWallet(wallet)
+    await AlchemyDataService.getCitizenByWallet(wallet)
         .then((response) => {
             nftData = response.data;
             if (isDevelopment || isLocalhost) {
@@ -84,6 +82,65 @@ export async function getCitizenForWallet(wallet) {
             outArray.push(nftData);
         }
     });
+
+    return outArray;
+}
+
+export async function getCitizenByTokenId(tokenId, series) {
+    let nftData = [];
+    const outArray = [];
+
+    if (isDevelopment || isLocalhost) {
+        console.log(`tokenId: ${tokenId}, series: ${series}`);
+    }
+
+    // Get the citizen(s) by token ID
+    await AlchemyDataService.getCitizenByTokenId(tokenId, series)
+        .then((response) => {
+            nftData.push(response.data);
+            if (isDevelopment || isLocalhost) {
+                console.log(nftData);
+            }
+        })
+        .catch((e) => {
+            if (isDevelopment || isLocalhost) {
+                console.log(e);
+            } else {
+                console.log('There was an error fetching the citizen data.');
+            }
+            return '';
+        });
+
+    // Filter out spam contracts and add the image URL to the data
+    nftData.forEach((nft) => {
+        if (nft.contract.isSpam === true) return;
+        let imagePath = nft.image.originalUrl;
+
+        if (imagePath === undefined) {
+            if (isDevelopment || isLocalhost) {
+                console.log('imagePath is undefined');
+            }
+            return;
+        } else if (imagePath.includes('data:image/')) {
+            if (isDevelopment || isLocalhost) {
+                console.log('imagePath is a data URL. Using pngUrl');
+            }
+            let url = nft.image.pngUrl + '?format=png';
+            let nftData = {
+                img: url,
+                ...nft,
+            };
+            outArray.push(nftData);
+        } else {
+            let nftData = {
+                img: imagePath.replace('ipfs://', 'https://ipfs.io/ipfs/'),
+                ...nft,
+            };
+            outArray.push(nftData);
+        }
+    });
+
+    console.log('called getCitizenByTokenId');
 
     return outArray;
 }

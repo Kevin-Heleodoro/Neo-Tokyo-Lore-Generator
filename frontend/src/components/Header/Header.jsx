@@ -1,25 +1,25 @@
-import styled from 'styled-components';
 import { Link } from 'react-router-dom';
-// import { FaBars, FaHome } from 'react-icons/fa';
+import { useState } from 'react';
 
 import SearchContainer from './SearchContainer';
-import WalletContainer from './WalletContainer';
+import {
+    Header,
+    Title,
+    SearchWrapper,
+    HamburgerMenu,
+    MobileSearchContainer,
+} from './Header.styles';
 
 /**
- * This component is the header for the application. It displays the title, search bar,
- * and wallet connection button. It also handles the logic for connecting and disconnecting
- * the wallet.
+ * This component is the header for the application. It displays the title and search bar.
  */
-const HeaderComponent = ({
-    signerAddress,
-    setNfts,
-    setLoading,
-    isConnected,
-    setIsConnected,
-    walletAddress,
-    setWalletAddress,
-    setSigner,
-}) => {
+const HeaderComponent = ({ setNfts, setLoading }) => {
+    const [menuOpen, setMenuOpen] = useState(false);
+
+    const toggleMenu = () => {
+        setMenuOpen(!menuOpen);
+    };
+
     return (
         <Header>
             <Title>
@@ -27,51 +27,31 @@ const HeaderComponent = ({
                     to="/home"
                     style={{ textDecoration: 'none', color: '#8a2be2' }}
                 >
-                    Neo Tokyo Lore Generator
+                    NeoScribe
                 </Link>
             </Title>
-            <SearchContainer setNfts={setNfts} setLoading={setLoading} />
-            <WalletContainer
-                isConnected={isConnected}
-                walletAddress={walletAddress}
-                signerAddress={signerAddress}
-                setSigner={setSigner}
-                setIsConnected={setIsConnected}
-                setWalletAddress={setWalletAddress}
-            />
+            <SearchWrapper>
+                <SearchContainer setNfts={setNfts} setLoading={setLoading} />
+            </SearchWrapper>
+            <HamburgerMenu
+                data-testid="hamburger-button"
+                onClick={toggleMenu}
+                open={menuOpen}
+            >
+                <span></span>
+                <span></span>
+                <span></span>
+            </HamburgerMenu>
+            {menuOpen && (
+                <MobileSearchContainer open={menuOpen}>
+                    <SearchContainer
+                        setNfts={setNfts}
+                        setLoading={setLoading}
+                    />
+                </MobileSearchContainer>
+            )}
         </Header>
     );
 };
 
 export default HeaderComponent;
-
-/**
- * Styled Components
- */
-
-const Header = styled.header`
-    background-color: #1f1f1f;
-    color: white;
-    padding: 10px 20px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    border-bottom: 2px solid #8a2be2;
-    box-shadow: 0 0 15px rgba(138, 43, 226, 0.7);
-    flex-wrap: wrap;
-
-    @media (max-width: 768px) {
-        flex-direction: column;
-        align-items: flex-start;
-    }
-`;
-
-const Title = styled.h1`
-    font-size: 1.5em;
-    color: #8a2be2;
-    margin: 0;
-
-    @media (max-width: 768px) {
-        font-size: 1.2em;
-    }
-`;

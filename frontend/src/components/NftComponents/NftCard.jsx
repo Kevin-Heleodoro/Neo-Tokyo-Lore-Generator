@@ -18,6 +18,7 @@ const isLocalhost = window.location.hostname === 'localhost';
 const NftCard = ({ nft }) => {
     const [backstory, setBackstory] = useState(false);
     const [loading, setLoading] = useState(false);
+    const [imageLoaded, setImageLoaded] = useState(false);
 
     const handleGenerateBackstory = async () => {
         try {
@@ -63,7 +64,14 @@ const NftCard = ({ nft }) => {
     return (
         <Card key={nft.contract.address + nft.tokenId}>
             <ImageContainer>
-                <NftImage src={nft.img} alt={nft.name} />
+                {!imageLoaded && <LoaderComponent />}
+                <NftImage
+                    src={nft.img}
+                    alt={nft.name}
+                    onLoad={() => setImageLoaded(true)}
+                    onError={() => setImageLoaded(false)}
+                    style={{ display: imageLoaded ? 'block' : 'none' }}
+                />
             </ImageContainer>
             <Details>
                 <p>{nft.name}</p>

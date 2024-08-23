@@ -21,11 +21,18 @@ class AlchemyDataService {
         return axios.get(BASE_URL + '/nfts/' + address);
     }
 
-    async getCitizenForWallet(address) {
+    async getCitizenByWallet(address) {
         if (isDevelopment || isLocalhost) {
-            console.log('getCitizenForWallet called');
+            console.log('getCitizenByWallet called');
         }
-        return axios.get(BASE_URL + '/citizen/' + address);
+        return axios.get(BASE_URL + '/citizen/wallet/' + address);
+    }
+
+    async getCitizenByTokenId(tokenId, series) {
+        if (isDevelopment || isLocalhost) {
+            console.log('getCitizenByTokenId called');
+        }
+        return axios.get(BASE_URL + '/citizen/id/' + tokenId + '/' + series);
     }
 
     async getLoreForCitizen(citizen) {

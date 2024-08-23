@@ -1,33 +1,22 @@
 import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 
-import { connectWallet } from '../../utilities/walletUtility';
-
 /**
- * This component is the landing page for the application. It displays a "Connect Wallet"
- * button that, when clicked, will connect the user's wallet to the application.
+ * This component is the landing page for the application. It displays an "Enter Citizen"
+ * button that, when clicked, will route the user to the home page.
  *
- * @param {*} setIsWalletConnected State setter for wallet connection
  * @returns <LandingPage />
  */
-const LandingPage = ({ setIsWalletConnected }) => {
+const LandingPage = () => {
     const navigate = useNavigate();
 
-    async function handleConnectWallet() {
-        const { signature, signer } = await connectWallet();
-        if (signature) {
-            // setIsWalletConnected(true);
-            navigate('/home', { state: { signer } });
-        } else {
-            console.log('User denied account access');
-        }
+    async function handleEnter() {
+        navigate('/home');
     }
 
     return (
         <PageContainer>
-            <ConnectButton onClick={handleConnectWallet}>
-                Connect Wallet
-            </ConnectButton>
+            <ConnectButton onClick={handleEnter}>Enter Citizen</ConnectButton>
         </PageContainer>
     );
 };
