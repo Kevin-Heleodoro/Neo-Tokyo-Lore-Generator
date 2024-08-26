@@ -1,7 +1,10 @@
 const dotenv = require('dotenv');
 const { Alchemy, Network } = require('alchemy-sdk');
 
-const { ContractAddresses } = require('../config/apiConfig.js');
+const {
+    ContractAddresses,
+    MagicEdenImageURL,
+} = require('../config/apiConfig.js');
 
 class NFTController {
     // First attempt at finding a way to reduce the number of times we have to
@@ -119,6 +122,8 @@ class NFTController {
                 `Request for tokenId: ${tokenId}, series: ${series}, contract: ${contract}`
             );
             const nft = await alchemy.nft.getNftMetadata(contract, tokenId);
+            nft.img = MagicEdenImageURL(series, tokenId);
+            console.log(nft);
             res.json(nft);
         } catch (error) {
             console.log(error);

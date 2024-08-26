@@ -114,30 +114,32 @@ export async function getCitizenByTokenId(tokenId, series) {
     // Filter out spam contracts and add the image URL to the data
     nftData.forEach((nft) => {
         if (nft.contract.isSpam === true) return;
-        let imagePath = nft.image.originalUrl;
 
-        if (imagePath === undefined) {
-            if (isDevelopment || isLocalhost) {
-                console.log('imagePath is undefined');
-            }
-            return;
-        } else if (imagePath.includes('data:image/')) {
-            if (isDevelopment || isLocalhost) {
-                console.log('imagePath is a data URL. Using pngUrl');
-            }
-            let url = nft.image.pngUrl + '?format=png';
-            let nftData = {
-                img: url,
-                ...nft,
-            };
-            outArray.push(nftData);
-        } else {
-            let nftData = {
-                img: imagePath.replace('ipfs://', 'https://ipfs.io/ipfs/'),
-                ...nft,
-            };
-            outArray.push(nftData);
-        }
+        outArray.push(nft);
+        // let imagePath = nft.image.originalUrl;
+
+        // if (imagePath === undefined) {
+        //     if (isDevelopment || isLocalhost) {
+        //         console.log('imagePath is undefined');
+        //     }
+        //     return;
+        // } else if (imagePath.includes('data:image/')) {
+        //     if (isDevelopment || isLocalhost) {
+        //         console.log('imagePath is a data URL. Using pngUrl');
+        //     }
+        //     let url = nft.image.pngUrl + '?format=png';
+        //     let nftData = {
+        //         img: url,
+        //         ...nft,
+        //     };
+        //     outArray.push(nftData);
+        // } else {
+        //     let nftData = {
+        //         img: imagePath.replace('ipfs://', 'https://ipfs.io/ipfs/'),
+        //         ...nft,
+        //     };
+        //     outArray.push(nftData);
+        // }
     });
 
     console.log('called getCitizenByTokenId');

@@ -13,7 +13,19 @@ const OpenAISystemConfig = {
         'Your job is to generate a short backstory of a citizen using some keywords that are associated with that citizen.',
 };
 
-module.exports = { ContractAddresses, OpenAISystemConfig };
+const MagicEdenImageURL = (series, tokenId) => {
+    let contract;
+    if (series == 'S1') {
+        contract = ContractAddresses.NTCTZN;
+    } else if (series == 'S2') {
+        contract = ContractAddresses.NTOCTZN;
+    } else {
+        return '';
+    }
+    return `https://img-cdn.magiceden.dev/rs:fill:400:0:0/plain/https%3A%2F%2Frenderer.magiceden.dev%2Fv3%2Fethereum%2Frender%3Fcontract%3D${contract}%26tokenId%3D${tokenId}`;
+};
+
+module.exports = { ContractAddresses, OpenAISystemConfig, MagicEdenImageURL };
 
 // "The Citizen Lore Initiative aims to collect user-submitted lore that Neo Tokyo citizens have developed about the Citizen assets they own. The Neo Tokyo writing team plans to use these character descriptions / stories in upcoming lore development.
 // If a writer chooses to use your character, they will be in contact to follow up with questions, queries, concerns - and get your approval, before your character is included in the proposed lore.
