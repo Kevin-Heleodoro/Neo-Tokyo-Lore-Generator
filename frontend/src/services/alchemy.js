@@ -9,35 +9,35 @@ const isLocalhost = window.location.hostname === 'localhost';
 class AlchemyDataService {
     async getAlchemyInfo(wallet) {
         if (isDevelopment || isLocalhost) {
-            console.log('getAlchemyInfo called');
+            console.log('AlchemyDataService.getAlchemyInfo called');
         }
         return axios.post(BASE_URL, { wallet });
     }
 
     async getNFTsForOwner(address) {
         if (isDevelopment || isLocalhost) {
-            console.log('getNFTsForOwner called');
+            console.log('AlchemyDataService.getNFTsForOwner called');
         }
         return axios.get(BASE_URL + '/nfts/' + address);
     }
 
     async getCitizenByWallet(address) {
         if (isDevelopment || isLocalhost) {
-            console.log('getCitizenByWallet called');
+            console.log('AlchemyDataService.getCitizenByWallet called');
         }
         return axios.get(BASE_URL + '/citizen/wallet/' + address);
     }
 
     async getCitizenByTokenId(tokenId, series) {
         if (isDevelopment || isLocalhost) {
-            console.log('getCitizenByTokenId called');
+            console.log('AlchemyDataService.getCitizenByTokenId called');
         }
         return axios.get(BASE_URL + '/citizen/id/' + tokenId + '/' + series);
     }
 
     async getLoreForCitizen(citizen) {
         if (isDevelopment || isLocalhost) {
-            console.log('getLoreForCitizen called');
+            console.log('AlchemyDataService.getLoreForCitizen called');
         }
         return axios.post(BASE_URL + '/ai/generate', citizen);
     }

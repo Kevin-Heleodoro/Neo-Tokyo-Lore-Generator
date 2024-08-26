@@ -3,43 +3,6 @@ import AlchemyDataService from './alchemy';
 const isDevelopment = process.env.NODE_ENV === 'development';
 const isLocalhost = window.location.hostname === 'localhost';
 
-export async function getAlchemyInfo(wallet) {
-    const url = process.env.REACT_APP_API_BASE_URL + 'api';
-    const options = {
-        method: 'GET',
-        headers: {
-            'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({ wallet }),
-    };
-    let response = await fetch(url, options);
-    let data = await response.json();
-    if (isDevelopment || isLocalhost) {
-        console.log('getAlchemyInfo data: ' + data);
-    }
-    return data;
-}
-
-export async function getNFTsForOwner(address) {
-    const url = process.env.REACT_APP_API_BASE_URL + 'api/nfts/' + address;
-    console.log({ url });
-    const options = {
-        method: 'GET',
-        headers: {
-            'Content-Type': 'application/json',
-        },
-    };
-    if (isDevelopment || isLocalhost) {
-        console.log({ options });
-    }
-    let response = await fetch(url, options);
-    let data = await response.json();
-    if (isDevelopment || isLocalhost) {
-        console.log('getNFTsForOwner data: ' + data);
-    }
-    return data;
-}
-
 /**
  * This function gets the citizen(s) for a wallet address and returns the data in an array.
  *
@@ -86,20 +49,28 @@ export async function getCitizenByWallet(wallet) {
     return outArray;
 }
 
+/**
+ * This function gets the citizen(s) for a token ID and series and returns the data in an array.
+ *
+ * @param {*} tokenId Token ID to get citizen data for
+ * @param {*} series Inner (S1) or Outer (S2) citizen
+ * @returns {Array} An array of citizen data
+ */
 export async function getCitizenByTokenId(tokenId, series) {
-    let nftData = [];
-    const outArray = [];
+    let outArray = [];
 
     if (isDevelopment || isLocalhost) {
-        console.log(`tokenId: ${tokenId}, series: ${series}`);
+        console.log(
+            `Called getCitizenByTokenId with params tokenId: ${tokenId}, series: ${series}`
+        );
     }
 
     // Get the citizen(s) by token ID
     await AlchemyDataService.getCitizenByTokenId(tokenId, series)
         .then((response) => {
-            nftData.push(response.data);
+            outArray.push(response.data);
             if (isDevelopment || isLocalhost) {
-                console.log(nftData);
+                console.log(response.data);
             }
         })
         .catch((e) => {
@@ -110,39 +81,6 @@ export async function getCitizenByTokenId(tokenId, series) {
             }
             return '';
         });
-
-    // Filter out spam contracts and add the image URL to the data
-    nftData.forEach((nft) => {
-        if (nft.contract.isSpam === true) return;
-
-        outArray.push(nft);
-        // let imagePath = nft.image.originalUrl;
-
-        // if (imagePath === undefined) {
-        //     if (isDevelopment || isLocalhost) {
-        //         console.log('imagePath is undefined');
-        //     }
-        //     return;
-        // } else if (imagePath.includes('data:image/')) {
-        //     if (isDevelopment || isLocalhost) {
-        //         console.log('imagePath is a data URL. Using pngUrl');
-        //     }
-        //     let url = nft.image.pngUrl + '?format=png';
-        //     let nftData = {
-        //         img: url,
-        //         ...nft,
-        //     };
-        //     outArray.push(nftData);
-        // } else {
-        //     let nftData = {
-        //         img: imagePath.replace('ipfs://', 'https://ipfs.io/ipfs/'),
-        //         ...nft,
-        //     };
-        //     outArray.push(nftData);
-        // }
-    });
-
-    console.log('called getCitizenByTokenId');
 
     return outArray;
 }

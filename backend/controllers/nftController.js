@@ -6,21 +6,19 @@ const {
     MagicEdenImageURL,
 } = require('../config/apiConfig.js');
 
+/**
+ * NFTController is a class that contains static functions to handle
+ * requests related to NFTs. The functions in this class will be used
+ * as the callback functions for the routes that are defined in the
+ * router.js file.
+ */
 class NFTController {
-    // First attempt at finding a way to reduce the number of times we have to
-    // create a new Alchemy instance. This is not the way to do it.
-    // static async _alchemySetup() {
-    //     dotenv.config();
-    //     const config = {
-    //         apiKey: process.env.ALCHEMY_API_KEY,
-    //         network: Network.Mainnet,
-    //     };
-    //     const alchemy = new Alchemy(config);
-    //     return alchemy;
-    // }
-
-    // This function is used to get the NFTs for a given address. It will
-    // return an array of NFTs that are owned by the address.
+    /**
+     * This function is used to get the NFTs for a given address. It will
+     * return an array of NFTs that are owned by the address.
+     * @param {*} req params should contain the address of the owner
+     * @param {*} res response will contain an array of NFTs owned by the address
+     */
     static async apiGetNFTsForOwner(req, res) {
         const config = {
             apiKey: process.env.ALCHEMY_API_KEY,
@@ -57,9 +55,13 @@ class NFTController {
         }
     }
 
-    // This function is used to get the citizen for a given address. It will
-    // return an array of NFTs that are owned by the address and are from
-    // ContractAddresses.
+    /**
+     * This function is used to get the citizen for a given address. It will
+     * return an array of NFTs that are owned by the address and are from
+     * ContractAddresses.
+     * @param {*} req params should contain the address of the owner
+     * @param {*} res response will contain all NT ciizens owned by the address
+     */
     static async getCitizenByWallet(req, res) {
         const config = {
             apiKey: process.env.ALCHEMY_API_KEY,
@@ -96,6 +98,13 @@ class NFTController {
         }
     }
 
+    /**
+     * This function is used to get the citizen for a given tokenId. It will
+     * return the specific citizen with the token ID and series. The image url
+     * is also updated to use Magic Eden's api to get the image.
+     * @param {*} req params should contain the tokenId and series of the citizen
+     * @param {*} res response will contain the citizen with the token ID and series
+     */
     static async getCitizenByTokenId(req, res) {
         const config = {
             apiKey: process.env.ALCHEMY_API_KEY,
