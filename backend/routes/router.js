@@ -16,10 +16,6 @@ const limiter = rateLimit({
 });
 
 router
-    .route('/nfts/:address')
-    .get(validateAddress, NFTController.apiGetNFTsForOwner);
-
-router
     .route('/citizen/wallet/:address')
     .get(validateAddress, NFTController.getCitizenByWallet);
 

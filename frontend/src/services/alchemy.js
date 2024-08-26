@@ -7,20 +7,6 @@ const isDevelopment = process.env.NODE_ENV === 'development';
 const isLocalhost = window.location.hostname === 'localhost';
 
 class AlchemyDataService {
-    async getAlchemyInfo(wallet) {
-        if (isDevelopment || isLocalhost) {
-            console.log('AlchemyDataService.getAlchemyInfo called');
-        }
-        return axios.post(BASE_URL, { wallet });
-    }
-
-    async getNFTsForOwner(address) {
-        if (isDevelopment || isLocalhost) {
-            console.log('AlchemyDataService.getNFTsForOwner called');
-        }
-        return axios.get(BASE_URL + '/nfts/' + address);
-    }
-
     async getCitizenByWallet(address) {
         if (isDevelopment || isLocalhost) {
             console.log('AlchemyDataService.getCitizenByWallet called');

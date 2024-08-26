@@ -14,48 +14,6 @@ const {
  */
 class NFTController {
     /**
-     * This function is used to get the NFTs for a given address. It will
-     * return an array of NFTs that are owned by the address.
-     * @param {*} req params should contain the address of the owner
-     * @param {*} res response will contain an array of NFTs owned by the address
-     */
-    static async apiGetNFTsForOwner(req, res) {
-        const config = {
-            apiKey: process.env.ALCHEMY_API_KEY,
-            network: Network.Mainnet,
-        };
-        const alchemy = new Alchemy(config);
-        const address = req.params.address;
-        try {
-            // nfts["pageKeys"] will have a value if address has over 100 nfts,
-            // look up how to submit request for next page of nfts
-            const nfts = await alchemy.nft.getNftsForOwner(address);
-            const numNfts = nfts['totalCount'];
-            const nftList = nfts['ownedNfts'];
-
-            let i = 1;
-            let junkNfts = 0;
-            const nftResults = [];
-            for (let nft of nftList) {
-                if (nft['name']) {
-                    nftResults.push(nft);
-                    i++;
-                } else {
-                    junkNfts++;
-                }
-            }
-
-            res.json(nftResults);
-        } catch (error) {
-            console.log(error);
-            res.status(500).json({
-                error: error,
-                message: `Failed to get NFTs for owner ${address}`,
-            });
-        }
-    }
-
-    /**
      * This function is used to get the citizen for a given address. It will
      * return an array of NFTs that are owned by the address and are from
      * ContractAddresses.
@@ -88,6 +46,15 @@ class NFTController {
                     citizen.push(nft);
                 }
             }
+
+            if (citizen.length === 0) {
+                res.json({
+                    message: `No NT citizens found for owner ${address}`,
+                    status: 204,
+                });
+                return;
+            }
+
             res.json(citizen);
         } catch (error) {
             console.log(error);
