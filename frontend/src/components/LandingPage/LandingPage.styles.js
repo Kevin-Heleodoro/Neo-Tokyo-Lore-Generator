@@ -91,16 +91,16 @@ export const ConnectButton = styled.button`
         border-radius: 0.3em;
         background-color: #8a2be2;
         z-index: -1;
-        animation: ${buttonFill} 1s forwards;
+        animation: ${buttonFill} 1s ease;
     }
 
     &:hover {
-        animation: ${neonGlow} 4s infinite, ${pulseStart} 1.5s ease-out;
+        animation: ${neonGlow} 4s infinite, ${pulseStart} 1.5s ease;
         animation-delay: 0.75s;
     }
 
     @media (max-width: 900px) {
-        animation: ${neonGlow} 4s infinite, ${pulseStart} 1.5s ease-out;
+        animation: ${neonGlow} 4s infinite, ${pulseStart} 1.5s ease;
         animation-delay: 0.75s;
 
         &:before,
