@@ -16,10 +16,16 @@ export async function getCitizenByWallet(wallet) {
     // Get the citizen(s) for the wallet address
     await AlchemyDataService.getCitizenByWallet(wallet)
         .then((response) => {
-            nftData = response.data;
             if (isDevelopment || isLocalhost) {
-                console.log(nftData);
+                console.log(`Address: ${wallet} returned the following data:`);
+                console.log(response.data);
             }
+
+            if (response.status === 204) {
+                return [];
+            }
+
+            nftData = response.data;
         })
         .catch((e) => {
             if (isDevelopment || isLocalhost) {

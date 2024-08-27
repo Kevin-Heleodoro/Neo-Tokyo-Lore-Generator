@@ -12,7 +12,7 @@ const NftCardContainer = ({ nfts }) => {
                     <Paragraph>Smells like meatbag in here ...</Paragraph>
                     <Paragraph>
                         No citizen found. Try searching for a different wallet
-                        address.
+                        address or token ID.
                     </Paragraph>
                 </EmptyMessage>
             )}

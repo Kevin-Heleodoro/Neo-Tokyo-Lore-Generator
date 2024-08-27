@@ -9,21 +9,27 @@ const isLocalhost = window.location.hostname === 'localhost';
 class AlchemyDataService {
     async getCitizenByWallet(address) {
         if (isDevelopment || isLocalhost) {
-            console.log('AlchemyDataService.getCitizenByWallet called');
+            console.log(
+                `AlchemyDataService.getCitizenByWallet called for address: ${address}`
+            );
         }
         return axios.get(BASE_URL + '/citizen/wallet/' + address);
     }
 
     async getCitizenByTokenId(tokenId, series) {
         if (isDevelopment || isLocalhost) {
-            console.log('AlchemyDataService.getCitizenByTokenId called');
+            console.log(
+                `AlchemyDataService.getCitizenByTokenId called for tokenId: ${tokenId}, series: ${series}`
+            );
         }
         return axios.get(BASE_URL + '/citizen/id/' + tokenId + '/' + series);
     }
 
     async getLoreForCitizen(citizen) {
         if (isDevelopment || isLocalhost) {
-            console.log('AlchemyDataService.getLoreForCitizen called');
+            console.log(
+                `AlchemyDataService.getLoreForCitizen called for citizen: ${citizen}`
+            );
         }
         return axios.post(BASE_URL + '/ai/generate', citizen);
     }
