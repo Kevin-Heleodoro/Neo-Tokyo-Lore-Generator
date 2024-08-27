@@ -11,8 +11,14 @@ export const SearchBody = styled.div`
         width: 100%;
     }
 
+    @media (max-width: 900px) {
+        display: flex;
+        justify-content: center;
+        flex-wrap: wrap;
+    }
+
     @media (max-width: 480px) {
-        flex-direction: column;
+        justify-content: center;
         align-items: stretch;
         width: 100%;
     }
@@ -34,8 +40,14 @@ export const SearchBar = styled.input`
         box-shadow: 0 0 10px #8a2be2;
     }
 
+    @media (max-width: 900px) {
+        ${'' /* width: 90%; */}
+        font-size: 1em;
+        margin-bottom: 10px;
+    }
+
     @media (max-width: 480px) {
-        width: 100%;
+        width: 80%;
         margin-bottom: 10px;
     }
 `;
@@ -44,8 +56,13 @@ export const SearchButtonWrapper = styled.div`
     display: flex;
     position: relative;
 
+    @media (max-width: 900px) {
+        justify-content: center;
+        align-items: center;
+    }
+
     @media (max-width: 480px) {
-        width: 100%;
+        flex-direction: column;
     }
 `;
 
@@ -64,7 +81,12 @@ export const SearchButton = styled.button`
         box-shadow: 0 0 10px #7a1ed2;
     }
 
+    @media (max-width: 900px) {
+        padding: 10px 20px;
+        width: 90%;
+    }
+
     @media (max-width: 480px) {
-        width: 100%;
+        margin-bottom: 10px;
     }
 `;

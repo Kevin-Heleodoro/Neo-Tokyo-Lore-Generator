@@ -74,7 +74,7 @@ export const HamburgerMenu = styled.div`
         display: block;
         position: absolute;
         top: 1.25rem;
-        right: 2rem;
+        right: 2.2rem;
         cursor: pointer;
         z-index: 20;
 
@@ -91,15 +91,19 @@ export const HamburgerMenu = styled.div`
             open &&
             `
             & span:nth-child(1) {
-                transform: rotate(45deg) translate(5px, 5px);
+                transform: rotate(45deg) translate(5.5px, 5px);
             }
             & span:nth-child(2) {
                 opacity: 0;
             }
             & span:nth-child(3) {
-                transform: rotate(-45deg) translate(5px, -5px);
+                transform: rotate(-45deg) translate(5.5px, -5px);
             }
             `}
+    }
+
+    @media (max-width: 480px) {
+        right: 1.25rem;
     }
 `;
 

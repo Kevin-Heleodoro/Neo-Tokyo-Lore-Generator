@@ -64,8 +64,8 @@ const SearchContainer = ({ setNfts, setLoading }) => {
             />
             <SearchButtonWrapper>
                 <SearchButton onClick={handleGetCitizens}>Search</SearchButton>
+                <CheckSlider onChange={handleChange} checked={checked} />
             </SearchButtonWrapper>
-            <CheckSlider onChange={handleChange} checked={checked} />
         </SearchBody>
     );
 };

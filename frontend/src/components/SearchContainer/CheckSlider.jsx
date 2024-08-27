@@ -19,6 +19,14 @@ const CheckboxWrapper = styled.label`
     margin-left: 10px;
     position: relative;
     cursor: pointer;
+
+    @media (max-width: 900px) {
+        ${'' /* width: 90%; */}
+    }
+
+    @media (max-width: 480px) {
+        margin-left: 0;
+    }
 `;
 
 const Input = styled.input.attrs({ type: 'checkbox' })`
@@ -31,11 +39,17 @@ const Input = styled.input.attrs({ type: 'checkbox' })`
     &:checked + div:before {
         transform: translateX(1.5rem);
     }
+
+    @media (max-width: 480) {
+        &:checked + div:before {
+            transform: translateX(0.75em);
+        }
+    }
 `;
 
 const Slider = styled.div`
-    width: 2.5rem;
-    height: 1.5rem;
+    width: 2.5em;
+    height: 1.5em;
     background-color: ${({ checked }) => (checked ? '#8a2be2' : '#8a2be2')};
     border-radius: 1.25rem;
     overflow: hidden;
@@ -50,14 +64,22 @@ const Slider = styled.div`
     &:before {
         content: '';
         position: absolute;
-        width: 1rem;
-        height: 1rem;
+        width: 1em;
+        height: 1em;
         background-color: #fff;
         border-radius: 10px;
         transition: transform 0.3s ease;
         transform: ${({ checked }) =>
             checked ? 'translateX(2.5rem)' : 'translateX(0)'};
         box-shadow: 0 0 10px 3px rgb(0, 0, 0, 0.25);
+    }
+
+    @media (max-width: 480) {
+        width: 5rem;
+
+        &:before {
+            transform: translateX(0.75rem);
+        }
     }
 `;
 

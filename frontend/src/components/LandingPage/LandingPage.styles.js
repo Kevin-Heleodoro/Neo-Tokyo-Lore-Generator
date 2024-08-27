@@ -88,4 +88,8 @@ export const ConnectButton = styled.button`
                 0 0 15px #00ff7f, 0 0 20px #7b68ee;
         }
     }
+
+    @media (max-width: 480px) {
+        font-size: 1.25em;
+    }
 `;
