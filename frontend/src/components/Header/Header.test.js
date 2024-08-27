@@ -4,7 +4,9 @@ import { BrowserRouter as Router } from 'react-router-dom';
 import Header from './Header';
 
 // Mock the SearchContainer component
-jest.mock('./SearchContainer', () => () => <div>SearchContainer Mock</div>);
+jest.mock('../SearchContainer/SearchContainer', () => () => (
+    <div>SearchContainer Mock</div>
+));
 
 describe('HeaderComponent', () => {
     test('renders the header with title and search container', () => {
