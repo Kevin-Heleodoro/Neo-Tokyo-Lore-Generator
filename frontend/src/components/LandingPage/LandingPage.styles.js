@@ -1,4 +1,4 @@
-import styled from 'styled-components';
+import styled, { keyframes } from 'styled-components';
 
 export const PageContainer = styled.div`
     height: 100vh;
@@ -7,6 +7,42 @@ export const PageContainer = styled.div`
     align-items: center;
     background-image: url('/img/neo-tokyo-background.jpeg');
     background-size: cover;
+`;
+
+const neonGlow = keyframes`
+    0%, 100% {
+        box-shadow: 0 0 5px #8a2be2, 0 0 10px #ff0099, 0 0 15px #00ffa3,
+            0 0 20px #00ffff, 0 0 5px #ff8c00, 0 0 10px #ffd700,
+            0 0 15px #00ff7f, 0 0 20px #7b68ee;
+    }
+    50% {
+        box-shadow: 0 0 7px #8a2be2, 0 0 12px #ff0099, 0 0 17px #00ffa3,
+            0 0 22px #00ffff, 0 0 7px #ff8c00, 0 0 12px #ffd700,
+            0 0 17px #00ff7f, 0 0 22px #7b68ee;
+    }
+`;
+
+const pulseStart = keyframes`
+    0% {
+        box-shadow: none;
+    }
+    100% {
+        box-shadow: 0 0 5px #8a2be2, 0 0 10px #ff0099, 0 0 15px #00ffa3,
+            0 0 20px #00ffff, 0 0 5px #ff8c00, 0 0 10px #ffd700,
+            0 0 15px #00ff7f, 0 0 20px #7b68ee;
+    }
+`;
+
+const buttonFill = keyframes`
+    0% {
+        width: 10px;
+        background-color: transparent;
+    }
+    100% {
+        width: 100%;
+        background-color: #8a2be2;
+        z-index: -1;
+    }
 `;
 
 export const ConnectButton = styled.button`
@@ -34,6 +70,7 @@ export const ConnectButton = styled.button`
         transition: all 1s ease;
         border-top: none;
         border-bottom: none;
+        z-index: -1;
     }
 
     &:before {
@@ -50,46 +87,35 @@ export const ConnectButton = styled.button`
 
     &:hover:before,
     &:hover:after {
-        border-top: none;
-        border-bottom: none;
         width: 100%;
         border-radius: 0.3em;
+        background-color: #8a2be2;
         z-index: -1;
+        animation: ${buttonFill} 1s forwards;
     }
 
     &:hover {
-        border-top: none;
-        border-bottom: none;
-        animation: neonGlow 4s infinite, pulseStart 1.5s ease-out;
+        animation: ${neonGlow} 4s infinite, ${pulseStart} 1.5s ease-out;
         animation-delay: 0.75s;
     }
 
-    @keyframes neonGlow {
-        0%,
-        100% {
-            box-shadow: 0 0 5px #8a2be2, 0 0 10px #ff0099, 0 0 15px #00ffa3,
-                0 0 20px #00ffff, 0 0 5px #ff8c00, 0 0 10px #ffd700,
-                0 0 15px #00ff7f, 0 0 20px #7b68ee;
-        }
-        50% {
-            box-shadow: 0 0 7px #8a2be2, 0 0 12px #ff0099, 0 0 17px #00ffa3,
-                0 0 22px #00ffff, 0 0 7px #ff8c00, 0 0 12px #ffd700,
-                0 0 17px #00ff7f, 0 0 22px #7b68ee;
+    @media (max-width: 900px) {
+        animation: ${neonGlow} 4s infinite, ${pulseStart} 1.5s ease-out;
+        animation-delay: 0.75s;
+
+        &:before,
+        &:after {
+            animation: ${buttonFill} 2s forwards;
         }
     }
 
-    @keyframes pulseStart {
-        0% {
-            box-shadow: none;
-        }
-        100% {
-            box-shadow: 0 0 5px #8a2be2, 0 0 10px #ff0099, 0 0 15px #00ffa3,
-                0 0 20px #00ffff, 0 0 5px #ff8c00, 0 0 10px #ffd700,
-                0 0 15px #00ff7f, 0 0 20px #7b68ee;
-        }
+    @media (max-width: 900px) {
+        padding: 0.75em 1.5em;
+        font-size: 1.5em;
     }
 
     @media (max-width: 480px) {
-        font-size: 1.25em;
+        padding: 0.5em 1em;
+        font-size: 1.5em;
     }
 `;

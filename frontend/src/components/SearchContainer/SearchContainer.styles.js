@@ -41,7 +41,6 @@ export const SearchBar = styled.input`
     }
 
     @media (max-width: 900px) {
-        ${'' /* width: 90%; */}
         font-size: 1em;
         margin-bottom: 10px;
     }

@@ -20,10 +20,6 @@ const CheckboxWrapper = styled.label`
     position: relative;
     cursor: pointer;
 
-    @media (max-width: 900px) {
-        ${'' /* width: 90%; */}
-    }
-
     @media (max-width: 480px) {
         margin-left: 0;
     }
