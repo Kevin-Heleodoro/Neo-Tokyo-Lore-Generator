@@ -26,9 +26,7 @@ export const Title = styled.h1`
     font-size: 3em;
     color: #8a2be2;
     margin: 0;
-    ${'' /* flex: 0 0 auto; */}
     flex: 1;
-    ${'' /* position: absolute; */}
     left: 1rem;
     top: 0.5rem;
     text-decoration: none;

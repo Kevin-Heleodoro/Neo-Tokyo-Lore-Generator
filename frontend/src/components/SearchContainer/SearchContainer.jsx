@@ -13,7 +13,7 @@ import {
 } from './SearchContainer.styles';
 import CheckSlider from './CheckSlider';
 
-const SearchContainer = ({ setNfts, setLoading }) => {
+const SearchContainer = ({ setNfts, setLoading, menuOpen, setMenuOpen }) => {
     const searchInputRef = useRef(null);
     const [series, setSeries] = useState('S1'); // "S1" or "S2"
     const [checked, setChecked] = useState(false);
@@ -33,6 +33,10 @@ const SearchContainer = ({ setNfts, setLoading }) => {
             citizenNfts = await getCitizenByWallet(query);
         } else if (queryType === 'token') {
             citizenNfts = await getCitizenByTokenId(query, series);
+        }
+
+        if (menuOpen) {
+            setMenuOpen(false);
         }
 
         setNfts(citizenNfts);

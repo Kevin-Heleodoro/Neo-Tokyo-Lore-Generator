@@ -60,6 +60,8 @@ const HeaderComponent = ({ setNfts, setLoading }) => {
                     <SearchContainer
                         setNfts={setNfts}
                         setLoading={setLoading}
+                        setMenuOpen={setMenuOpen}
+                        menuOpen={menuOpen}
                     />
                 </MobileSearchContainer>
             )}
