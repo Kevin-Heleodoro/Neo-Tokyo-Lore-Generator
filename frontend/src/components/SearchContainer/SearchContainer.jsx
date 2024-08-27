@@ -1,4 +1,5 @@
 import { useRef, useState } from 'react';
+import styled from 'styled-components';
 
 import { validateInput } from '../../utilities/validator';
 import {
@@ -11,19 +12,18 @@ import {
     SearchBody,
     SearchButtonWrapper,
 } from './SearchContainer.styles';
+import CheckSlider from './CheckSlider';
 
 const SearchContainer = ({ setNfts, setLoading }) => {
     const searchInputRef = useRef(null);
     const [series, setSeries] = useState('S1'); // "S1" or "S2"
+    const [checked, setChecked] = useState(false);
 
     const handleGetCitizens = async () => {
         const query = searchInputRef.current.value.trim();
         let queryType = validateInput(query);
 
         if (queryType === 'invalid') {
-            // alert(
-            //     'Invalid input. Please enter a valid ETH address or Token ID.'
-            // );
             return;
         }
 
@@ -46,6 +46,15 @@ const SearchContainer = ({ setNfts, setLoading }) => {
         }
     };
 
+    const handleChange = (event) => {
+        setChecked(!checked);
+        if (checked) {
+            setSeries('S2');
+        } else {
+            setSeries('S1');
+        }
+    };
+
     return (
         <SearchBody>
             <SearchBar
@@ -57,6 +66,7 @@ const SearchContainer = ({ setNfts, setLoading }) => {
             <SearchButtonWrapper>
                 <SearchButton onClick={handleGetCitizens}>Search</SearchButton>
             </SearchButtonWrapper>
+            <CheckSlider onChange={handleChange} checked={checked} />
         </SearchBody>
     );
 };

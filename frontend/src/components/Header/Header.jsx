@@ -1,7 +1,7 @@
 import { Link } from 'react-router-dom';
 import { useState } from 'react';
 
-import SearchContainer from './SearchContainer';
+import SearchContainer from '../SearchContainer/SearchContainer';
 import {
     Header,
     Title,
