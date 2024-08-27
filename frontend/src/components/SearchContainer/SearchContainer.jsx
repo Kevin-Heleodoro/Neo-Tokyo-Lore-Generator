@@ -1,5 +1,4 @@
 import { useRef, useState } from 'react';
-import styled from 'styled-components';
 
 import { validateInput } from '../../utilities/validator';
 import {
@@ -49,9 +48,9 @@ const SearchContainer = ({ setNfts, setLoading }) => {
     const handleChange = (event) => {
         setChecked(!checked);
         if (checked) {
-            setSeries('S2');
-        } else {
             setSeries('S1');
+        } else {
+            setSeries('S2');
         }
     };
 
