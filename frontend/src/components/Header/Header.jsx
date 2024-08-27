@@ -25,7 +25,9 @@ const HeaderComponent = ({ setNfts, setLoading }) => {
             <Title>
                 <Link
                     to="/"
-                    style={{ textDecoration: 'none', color: '#8a2be2' }}
+                    style={{
+                        textDecoration: 'none',
+                    }}
                 >
                     NeoScribe
                 </Link>

@@ -19,13 +19,17 @@ export const Header = styled.header`
 `;
 
 export const Title = styled.h1`
-    font-size: 1.5em;
+    font-family: 'Jersey 10', sans-serif;
+    font-weight: 400;
+    font-style: normal;
+    font-size: 3em;
     color: #8a2be2;
     margin: 0;
     flex: 0 0 auto;
     position: absolute;
     left: 1rem;
-    top: 1.25rem;
+    top: 0.5rem;
+    text-decoration: none;
 `;
 
 export const SearchWrapper = styled.div`
