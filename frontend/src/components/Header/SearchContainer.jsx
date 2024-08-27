@@ -24,11 +24,16 @@ const SearchContainer = ({ setNfts, setLoading }) => {
 
     // Get citizens for wallet or token
     const handleGetCitizens = async () => {
+        const query = searchInputRef.current.value.trim();
+
+        if (!query) {
+            return;
+        }
+
         setNfts([]);
         setLoading(true);
         let citizenNfts;
 
-        const query = searchInputRef.current.value.trim();
         if (query) {
             if (searchType === 'wallet') {
                 citizenNfts = await getCitizenByWallet(query);
