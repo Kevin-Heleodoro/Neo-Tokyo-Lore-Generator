@@ -37,11 +37,6 @@ const SearchContainer = ({ setNfts, setLoading }) => {
             }
         }
 
-        // if (!citizenNfts) {
-        //     setLoading(false);
-        //     return;
-        // }
-
         setNfts(citizenNfts);
         setLoading(false);
     };

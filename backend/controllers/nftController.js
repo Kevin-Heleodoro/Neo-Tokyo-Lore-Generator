@@ -93,12 +93,16 @@ class NFTController {
         }
 
         try {
-            console.log(
-                `Request for tokenId: ${tokenId}, series: ${series}, contract: ${contract}`
-            );
             const nft = await alchemy.nft.getNftMetadata(contract, tokenId);
+
+            if (!nft || !nft.name) {
+                console.log(
+                    `Request (getCitizenByTokenId) for ${series} tokenId ${tokenId} returned no NT citizens`
+                );
+                return res.status(204).json();
+            }
+
             nft.img = MagicEdenImageURL(series, tokenId);
-            console.log(nft);
             res.json(nft);
         } catch (error) {
             console.log(error);

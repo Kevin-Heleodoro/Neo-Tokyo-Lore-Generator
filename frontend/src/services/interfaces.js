@@ -74,10 +74,18 @@ export async function getCitizenByTokenId(tokenId, series) {
     // Get the citizen(s) by token ID
     await AlchemyDataService.getCitizenByTokenId(tokenId, series)
         .then((response) => {
-            outArray.push(response.data);
             if (isDevelopment || isLocalhost) {
+                console.log(
+                    `${series} ${tokenId} returned the following data:`
+                );
                 console.log(response.data);
             }
+
+            if (response.status === 204) {
+                return [];
+            }
+
+            outArray.push(response.data);
         })
         .catch((e) => {
             if (isDevelopment || isLocalhost) {
