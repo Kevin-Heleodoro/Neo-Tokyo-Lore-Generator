@@ -48,11 +48,10 @@ class NFTController {
             }
 
             if (citizen.length === 0) {
-                res.json({
-                    message: `No NT citizens found for owner ${address}`,
-                    status: 204,
-                });
-                return;
+                console.log(
+                    `Request (getCitizenByWallet) for owner ${address} returned no NT citizens`
+                );
+                return res.status(204).json();
             }
 
             res.json(citizen);

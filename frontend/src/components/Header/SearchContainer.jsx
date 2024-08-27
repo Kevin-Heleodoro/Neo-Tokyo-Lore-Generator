@@ -26,18 +26,23 @@ const SearchContainer = ({ setNfts, setLoading }) => {
     const handleGetCitizens = async () => {
         setNfts([]);
         setLoading(true);
+        let citizenNfts;
 
         const query = searchInputRef.current.value.trim();
         if (query) {
             if (searchType === 'wallet') {
-                const citizenNfts = await getCitizenByWallet(query);
-                setNfts(citizenNfts);
+                citizenNfts = await getCitizenByWallet(query);
             } else if (searchType === 'token') {
-                const citizenNfts = await getCitizenByTokenId(query, series);
-                setNfts(citizenNfts);
+                citizenNfts = await getCitizenByTokenId(query, series);
             }
         }
 
+        if (!citizenNfts) {
+            setLoading(false);
+            return;
+        }
+
+        setNfts(citizenNfts);
         setLoading(false);
     };
 
