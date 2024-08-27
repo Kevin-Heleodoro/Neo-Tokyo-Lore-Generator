@@ -5,6 +5,7 @@ export const Header = styled.header`
     color: white;
     padding: 10px 20px;
     display: flex;
+    flex-wrap: wrap;
     justify-content: space-between;
     align-items: center;
     border-bottom: 2px solid #8a2be2;
@@ -12,7 +13,7 @@ export const Header = styled.header`
     position: relative;
     height: 3rem;
 
-    @media (max-width: 768px) {
+    @media (max-width: 900px) {
         flex-direction: column;
         align-items: stretch;
     }
@@ -25,22 +26,43 @@ export const Title = styled.h1`
     font-size: 3em;
     color: #8a2be2;
     margin: 0;
-    flex: 0 0 auto;
-    position: absolute;
+    ${'' /* flex: 0 0 auto; */}
+    flex: 1;
+    ${'' /* position: absolute; */}
     left: 1rem;
     top: 0.5rem;
     text-decoration: none;
+
+    @media (min-width: 1200px) {
+        flex: 0 0 auto;
+        position: absolute;
+    }
+
+    @media (max-width: 1200px) {
+        flex: 1;
+        right: 0;
+    }
+
+    @media (max-width: 900px) {
+        text-align: center;
+        margin-bottom: 0.5rem;
+    }
 `;
 
 export const SearchWrapper = styled.div`
-    flex: 1;
+    flex: 2;
     display: flex;
     justify-content: center;
     align-items: center;
     margin-left: auto;
     margin-right: auto;
 
-    @media (max-width: 768px) {
+    @media (max-width: 1200px) {
+        justify-content: flex-end;
+        width: 100%;
+    }
+
+    @media (max-width: 900px) {
         display: none;
     }
 `;
@@ -48,7 +70,7 @@ export const SearchWrapper = styled.div`
 export const HamburgerMenu = styled.div`
     display: none;
 
-    @media (max-width: 768px) {
+    @media (max-width: 900px) {
         display: block;
         position: absolute;
         top: 1.25rem;

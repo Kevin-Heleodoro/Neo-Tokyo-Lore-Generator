@@ -30,7 +30,7 @@ const GlobalStyle = createGlobalStyle`
         font-family: 'Roboto', sans-serif;
         color: white;
         position: relative;
-        overflow: hidden;
+        overflow: auto;
 
         &::before {
             content: '';

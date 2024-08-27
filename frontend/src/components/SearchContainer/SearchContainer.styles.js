@@ -6,6 +6,11 @@ export const SearchBody = styled.div`
     justify-content: center;
     flex-direction: row;
 
+    @media (max-width: 1200px) {
+        justify-content: flex-end;
+        width: 100%;
+    }
+
     @media (max-width: 480px) {
         flex-direction: column;
         align-items: stretch;
@@ -22,7 +27,7 @@ export const SearchBar = styled.input`
     background-color: #2a2a2a;
     color: white;
     outline: none;
-    width: 20rem;
+    width: 16rem;
     transition: all 0.3s ease;
 
     &:focus {

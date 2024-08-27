@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 
 import SearchContainer from '../SearchContainer/SearchContainer';
 import {
@@ -19,6 +19,17 @@ const HeaderComponent = ({ setNfts, setLoading }) => {
     const toggleMenu = () => {
         setMenuOpen(!menuOpen);
     };
+
+    useEffect(() => {
+        const handleResize = () => {
+            if (window.innerWidth > 768) {
+                setMenuOpen(false);
+            }
+        };
+
+        window.addEventListener('resize', handleResize);
+        return () => window.removeEventListener('resize', handleResize);
+    }, []);
 
     return (
         <Header>
