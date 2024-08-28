@@ -6,6 +6,7 @@ const NFTController = require('../controllers/nftController.js');
 const AIController = require('../controllers/aiController.js');
 const validateAddress = require('../validators/validateAddress.js');
 const validateAttributes = require('../validators/validateAttributes.js');
+const validateSeries = require('../validators/validateSeries.js');
 
 const router = express.Router();
 
@@ -21,7 +22,11 @@ router
 
 router
     .route('/citizen/id/:tokenId/:series')
-    .get(NFTController.getCitizenByTokenId);
+    .get(validateSeries, NFTController.getCitizenByTokenId);
+
+router
+    .route('/citizen/all/:series/:page')
+    .get(validateSeries, NFTController.getAllCitizens);
 
 router
     .route('/ai/generate')

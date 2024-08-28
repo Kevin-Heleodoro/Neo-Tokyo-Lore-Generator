@@ -29,7 +29,6 @@ console.log(`Whitelist: ${whitelist}`);
 
 const options = {
     origin: (origin, callback) => {
-        console.log(`Incoming request from origin: ${origin}`);
         if (
             whitelist.some((allowedOrigin) => allowedOrigin === origin) ||
             !origin

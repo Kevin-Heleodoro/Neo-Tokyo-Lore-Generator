@@ -4,7 +4,6 @@ const validateAddress = [
     check('address')
         .isString()
         .custom((value) => {
-            console.log(`Validating address: ${value}`);
             // Check if it's a valid Ethereum address
             const isEthereumAddress = /^0x[a-fA-F0-9]{40}$/.test(value);
             // Check if it's a valid ENS domain (basic check, can be expanded)

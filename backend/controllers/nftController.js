@@ -79,18 +79,11 @@ class NFTController {
         const alchemy = new Alchemy(config);
         const tokenId = req.params.tokenId;
         const series = req.params.series;
-        let contract;
 
-        if (series === 'S1') {
-            contract = ContractAddresses.NTCTZN;
-        } else if (series === 'S2') {
-            contract = ContractAddresses.NTOCTZN;
-        } else {
-            res.status(400).json({
-                message: `Invalid series ${series}`,
-            });
-            return;
-        }
+        let contract =
+            series == 'S1'
+                ? ContractAddresses.NTCTZN
+                : ContractAddresses.NTOCTZN;
 
         try {
             const nft = await alchemy.nft.getNftMetadata(contract, tokenId);
@@ -111,6 +104,21 @@ class NFTController {
                 message: `Failed to get citizen for owner ${tokenId} ... meatbag!`,
             });
         }
+    }
+
+    static async getAllCitizens(req, res) {
+        const config = {
+            apiKey: process.env.ALCHEMY_API_KEY,
+            network: Network.Mainnet,
+        };
+        const alchemy = new Alchemy(config);
+        const series = req.params.series;
+        const page = req.params.page;
+
+        let contract =
+            series == 'S1'
+                ? ContractAddresses.NTCTZN
+                : ContractAddresses.NTOCTZN;
     }
 }
 
