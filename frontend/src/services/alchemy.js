@@ -2,18 +2,19 @@ import axios from 'axios';
 
 const BASE_URL = process.env.REACT_APP_API_BASE_URL + 'api/v1';
 
-// Determine if the environment is development or local
 const isDevelopment = process.env.NODE_ENV === 'development';
 const isLocalhost = window.location.hostname === 'localhost';
 
 class AlchemyDataService {
-    async getAllCitizens(series, offset) {
+    async getAllCitizens(series, offset, limit) {
         if (isDevelopment || isLocalhost) {
             console.log(
-                `AlchemyDataService.getAllCitizens called for series: ${series}, offset: ${offset}`
+                `AlchemyDataService.getAllCitizens called for series: ${series}, offset: ${offset}, limit: ${limit}`
             );
         }
-        return axios.get(BASE_URL + '/citizen/all/' + series + '/' + offset);
+        return axios.get(
+            BASE_URL + '/citizen/all/' + series + '/' + limit + '/' + offset
+        );
     }
 
     async getCitizenByWallet(address) {

@@ -3,10 +3,18 @@ import AlchemyDataService from './alchemy';
 const isDevelopment = process.env.NODE_ENV === 'development';
 const isLocalhost = window.location.hostname === 'localhost';
 
-export async function getAllCitizens(series, offset) {
+/**
+ * This function gets all citizens for a series and returns the data in an array.
+ *
+ * @param {*} series The series to get citizens for
+ * @param {*} offset The offset to start at
+ * @param {*} limit The number of citizens to return
+ * @returns
+ */
+export async function getAllCitizens(series, offset, limit) {
     let nftData = [];
 
-    await AlchemyDataService.getAllCitizens(series, offset)
+    await AlchemyDataService.getAllCitizens(series, offset, limit)
         .then((response) => {
             if (isDevelopment || isLocalhost) {
                 console.log(`Series: ${series} returned the following data:`);

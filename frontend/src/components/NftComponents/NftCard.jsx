@@ -4,7 +4,6 @@ import styled from 'styled-components';
 import LoaderComponent from '../Shared/LoaderComponent';
 import { getLoreForCitizen } from '../../services/interfaces';
 
-// Determine if the environment is development or local
 const isDevelopment = process.env.NODE_ENV === 'development';
 const isLocalhost = window.location.hostname === 'localhost';
 
@@ -42,7 +41,7 @@ const NftCard = ({ nft }) => {
             let lore = await getLoreForCitizen(citizenInput);
 
             if (isDevelopment || isLocalhost) {
-                console.log(lore); // Log only in development or localhost
+                console.log(lore);
             }
 
             setLoading(false);
@@ -54,8 +53,9 @@ const NftCard = ({ nft }) => {
                     ))
             );
         } catch (error) {
+            setBackstory('Failed to generate backstory. Please try again.');
             if (isDevelopment || isLocalhost) {
-                console.log(error); // Log errors only in development or localhost
+                console.log(error);
             }
             setLoading(false);
         }
@@ -144,11 +144,11 @@ const BackstoryContainer = styled.div`
     border-radius: 10px;
     background-color: #2a2a2a;
     box-shadow: 0 0 10px rgba(138, 43, 226, 0.7);
-    max-height: 40vh; /* Set maximum height for the lore section */
-    overflow-y: auto; /* Enable vertical scrolling */
+    max-height: 40vh;
+    overflow-y: auto;
 
     @media (max-width: 480px) {
-        max-height: 150px; /* Adjust max-height for smaller screens */
+        max-height: 150px;
     }
 `;
 

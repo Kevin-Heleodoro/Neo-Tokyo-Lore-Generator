@@ -74,7 +74,9 @@ const SearchContainer = ({
                 onKeyDown={handleKeyDown}
             />
             <SearchButtonWrapper>
-                <SearchButton onClick={handleGetCitizens}>Search</SearchButton>
+                <SearchButton onClick={handleGetCitizens}>
+                    {searchInputRef.current ? 'Search' : 'Browse'}
+                </SearchButton>
                 <CheckSlider onChange={handleChange} checked={checked} />
             </SearchButtonWrapper>
         </SearchBody>

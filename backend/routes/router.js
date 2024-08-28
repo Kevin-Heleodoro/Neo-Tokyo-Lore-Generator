@@ -25,14 +25,14 @@ router
     .get(validateSeries, NFTController.getCitizenByTokenId);
 
 router
-    .route('/citizen/all/:series/:offset?/:limit?')
+    .route('/citizen/all/:series/:limit?/:offset?')
     .get(validateSeries, NFTController.getAllCitizens);
 
 router
     .route('/ai/generate')
     .post(limiter, validateAttributes, AIController.apiGetCitizenBackstory);
 
-router.use((req, res) => {
+router.use((err, req, res, next) => {
     console.error(err.stack);
     res.status(500).json({ error: 'Something went wrong!' });
 });

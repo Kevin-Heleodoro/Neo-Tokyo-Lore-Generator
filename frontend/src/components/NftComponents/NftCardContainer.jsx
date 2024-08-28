@@ -5,8 +5,10 @@ import NftCard from './NftCard';
 const NftCardContainer = ({ nfts }) => {
     return (
         <Container>
-            {nfts.length > 0 ? (
-                nfts.map((nft, index) => <NftCard key={index} nft={nft} />)
+            {nfts?.length > 0 ? (
+                nfts.map((nft, index) => (
+                    <NftCard key={nft.tokenId || index} nft={nft} />
+                ))
             ) : (
                 <EmptyMessage>
                     <Paragraph>Smells like meatbag in here ...</Paragraph>
