@@ -26,15 +26,13 @@ const Dashboard = ({ nfts, setNfts, loading, setLoading }) => {
 
     useEffect(() => {
         if (!hasMounted.current) {
-            // Initial mount, load citizens
             loadCitizens();
-            hasMounted.current = true; // Set to true after the initial mount
+            hasMounted.current = true;
         }
     }, []);
 
     useEffect(() => {
         if (hasMounted.current) {
-            // Only run this when `series` changes after the initial mount
             setOffset('');
             loadCitizens();
         }

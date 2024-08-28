@@ -127,7 +127,8 @@ class NFTController {
         };
         const alchemy = new Alchemy(config);
         const series = req.params.series;
-        const offset = req.params.offset;
+        const offset = req.params.offset || '';
+        const limit = req.params.limit || 15;
 
         let contract =
             series == 'S1'
@@ -140,8 +141,8 @@ class NFTController {
             );
 
             const response = await alchemy.nft.getNftsForContract(contract, {
-                pageKey: offset || '',
-                pageSize: 20,
+                pageKey: offset,
+                pageSize: limit,
             });
 
             console.log(Object.keys(response));

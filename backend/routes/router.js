@@ -25,7 +25,7 @@ router
     .get(validateSeries, NFTController.getCitizenByTokenId);
 
 router
-    .route('/citizen/all/:series/:offset?')
+    .route('/citizen/all/:series/:offset?/:limit?')
     .get(validateSeries, NFTController.getAllCitizens);
 
 router
