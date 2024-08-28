@@ -3,6 +3,38 @@ import AlchemyDataService from './alchemy';
 const isDevelopment = process.env.NODE_ENV === 'development';
 const isLocalhost = window.location.hostname === 'localhost';
 
+export async function getAllCitizens(series, offset) {
+    let nftData = [];
+
+    await AlchemyDataService.getAllCitizens(series, offset)
+        .then((response) => {
+            if (isDevelopment || isLocalhost) {
+                console.log(`Series: ${series} returned the following data:`);
+                console.log(response.data);
+            }
+
+            if (response.status === 204) {
+                return [];
+            }
+
+            nftData = response.data;
+        })
+        .catch((e) => {
+            if (isDevelopment || isLocalhost) {
+                console.log(e);
+            } else {
+                console.log('There was an error fetching the citizen data.');
+            }
+            return '';
+        });
+
+    return {
+        nfts: nftData.nfts,
+        nextOffset: nftData.nextOffset,
+        count: nftData.count,
+    };
+}
+
 /**
  * This function gets the citizen(s) for a wallet address and returns the data in an array.
  *

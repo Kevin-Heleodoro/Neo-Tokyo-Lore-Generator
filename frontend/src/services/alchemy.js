@@ -7,6 +7,15 @@ const isDevelopment = process.env.NODE_ENV === 'development';
 const isLocalhost = window.location.hostname === 'localhost';
 
 class AlchemyDataService {
+    async getAllCitizens(series, offset) {
+        if (isDevelopment || isLocalhost) {
+            console.log(
+                `AlchemyDataService.getAllCitizens called for series: ${series}, offset: ${offset}`
+            );
+        }
+        return axios.get(BASE_URL + '/citizen/all/' + series + '/' + offset);
+    }
+
     async getCitizenByWallet(address) {
         if (isDevelopment || isLocalhost) {
             console.log(

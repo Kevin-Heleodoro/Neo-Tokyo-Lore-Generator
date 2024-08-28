@@ -1,18 +1,54 @@
+import { useState, useEffect, useRef } from 'react';
 import { createGlobalStyle } from 'styled-components';
 
 import NftCardContainer from '../NftComponents/NftCardContainer';
 import HeaderComponent from '../Header/Header';
 import LoaderComponent from '../Shared/LoaderComponent';
+import { getAllCitizens } from '../../services/interfaces';
 
 /**
  * This component is the dashboard for the application. It displays the header and
  * the NFT card container. It also sets the global styles for the application.
  */
 const Dashboard = ({ nfts, setNfts, loading, setLoading }) => {
+    const [series, setSeries] = useState('S1'); // "S1" or "S2"
+    const [offset, setOffset] = useState('');
+    const hasMounted = useRef(false);
+
+    const loadCitizens = async () => {
+        setLoading(true);
+        setNfts([]);
+        const data = await getAllCitizens(series, offset);
+        setNfts(data.nfts);
+        setOffset(data.nextOffset);
+        setLoading(false);
+    };
+
+    useEffect(() => {
+        if (!hasMounted.current) {
+            // Initial mount, load citizens
+            loadCitizens();
+            hasMounted.current = true; // Set to true after the initial mount
+        }
+    }, []);
+
+    useEffect(() => {
+        if (hasMounted.current) {
+            // Only run this when `series` changes after the initial mount
+            setOffset('');
+            loadCitizens();
+        }
+    }, [series]);
+
     return (
         <div id="app">
             <GlobalStyle />
-            <HeaderComponent setNfts={setNfts} setLoading={setLoading} />
+            <HeaderComponent
+                setNfts={setNfts}
+                setLoading={setLoading}
+                setSeries={setSeries}
+                series={series}
+            />
             {loading ? <LoaderComponent /> : <NftCardContainer nfts={nfts} />}
         </div>
     );

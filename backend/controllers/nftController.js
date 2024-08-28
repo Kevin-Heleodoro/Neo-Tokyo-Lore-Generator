@@ -112,6 +112,14 @@ class NFTController {
         }
     }
 
+    /**
+     * This function is used to get all citizens for a given series. It will
+     * return an array of NFTs that are from the given series. The image url
+     * is also updated to use Magic Eden's api to get the image.
+     * @param {*} req params should contain the series and optional offset
+     * @param {*} res response will contain the current offset of 100 NT citizens
+     * @returns
+     */
     static async getAllCitizens(req, res) {
         const config = {
             apiKey: process.env.ALCHEMY_API_KEY,
@@ -133,6 +141,7 @@ class NFTController {
 
             const response = await alchemy.nft.getNftsForContract(contract, {
                 pageKey: offset || '',
+                pageSize: 20,
             });
 
             console.log(Object.keys(response));
@@ -157,6 +166,7 @@ class NFTController {
                     raw: {
                         metadata: nft.raw.metadata,
                     },
+                    contract: nft.contract,
                 };
 
                 citizens.push(citizen);

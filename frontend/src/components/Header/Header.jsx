@@ -13,7 +13,7 @@ import {
 /**
  * This component is the header for the application. It displays the title and search bar.
  */
-const HeaderComponent = ({ setNfts, setLoading }) => {
+const HeaderComponent = ({ setNfts, setLoading, setSeries, series }) => {
     const [menuOpen, setMenuOpen] = useState(false);
 
     const toggleMenu = () => {
@@ -44,7 +44,12 @@ const HeaderComponent = ({ setNfts, setLoading }) => {
                 </Link>
             </Title>
             <SearchWrapper>
-                <SearchContainer setNfts={setNfts} setLoading={setLoading} />
+                <SearchContainer
+                    setNfts={setNfts}
+                    setLoading={setLoading}
+                    setSeries={setSeries}
+                    series={series}
+                />
             </SearchWrapper>
             <HamburgerMenu
                 data-testid="hamburger-button"

@@ -13,9 +13,16 @@ import {
 } from './SearchContainer.styles';
 import CheckSlider from './CheckSlider';
 
-const SearchContainer = ({ setNfts, setLoading, menuOpen, setMenuOpen }) => {
+const SearchContainer = ({
+    setNfts,
+    setLoading,
+    menuOpen,
+    setMenuOpen,
+    series,
+    setSeries,
+}) => {
     const searchInputRef = useRef(null);
-    const [series, setSeries] = useState('S1'); // "S1" or "S2"
+    // const [series, setSeries] = useState('S1'); // "S1" or "S2"
     const [checked, setChecked] = useState(false);
 
     const handleGetCitizens = async () => {
