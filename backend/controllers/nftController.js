@@ -56,6 +56,9 @@ class NFTController {
 
             res.json(citizen);
         } catch (error) {
+            console.log(
+                `Request (getCitizenByWallet) for owner ${address} failed.`
+            );
             console.log(error);
             res.status(500).json({
                 error: error,
@@ -90,7 +93,7 @@ class NFTController {
 
             if (!nft || !nft.name) {
                 console.log(
-                    `Request (getCitizenByTokenId) for ${series} tokenId ${tokenId} returned no NT citizens`
+                    `Request (getCitizenByTokenId) for ${series} #${tokenId} returned no NT citizens`
                 );
                 return res.status(204).json();
             }
@@ -98,10 +101,13 @@ class NFTController {
             nft.img = MagicEdenImageURL(series, tokenId);
             res.json(nft);
         } catch (error) {
+            console.log(
+                `Request (getCitizenByTokenId) for ${series} #${tokenId} failed.`
+            );
             console.log(error);
             res.status(500).json({
                 error: error,
-                message: `Failed to get citizen for owner ${tokenId} ... meatbag!`,
+                message: `Failed to get citizen ${series} #${tokenId}.`,
             });
         }
     }
@@ -113,12 +119,62 @@ class NFTController {
         };
         const alchemy = new Alchemy(config);
         const series = req.params.series;
-        const page = req.params.page;
+        const offset = req.params.offset;
 
         let contract =
             series == 'S1'
                 ? ContractAddresses.NTCTZN
                 : ContractAddresses.NTOCTZN;
+
+        try {
+            console.log(
+                `Calling getAllCitizens for ${series} = ${contract}, offset = ${offset}`
+            );
+
+            const response = await alchemy.nft.getNftsForContract(contract, {
+                pageKey: offset || '',
+            });
+
+            console.log(Object.keys(response));
+
+            let nfts = response['nfts'];
+
+            if (!nfts || !nfts.length) {
+                console.log(
+                    `Request (getAllCitizens) for ${series} returned no NT citizens`
+                );
+                return res.status(204).json();
+            }
+
+            let citizens = [];
+            for (let nft of nfts) {
+                let citizen = {
+                    tokenId: nft.tokenId,
+                    name: nft.name,
+                    series: series,
+                    img: MagicEdenImageURL(series, nft.tokenId),
+                    description: nft.description,
+                    raw: {
+                        metadata: nft.raw.metadata,
+                    },
+                };
+
+                citizens.push(citizen);
+            }
+
+            res.json({
+                nfts: citizens,
+                nextOffset: response['pageKey'],
+                count: citizens.length,
+            });
+        } catch (error) {
+            console.log(`Request (getAllCitizens) for ${series} failed.`);
+            console.log(error);
+            res.status(500).json({
+                error: error,
+                message: `Failed to get all citizens for ${series}.`,
+            });
+        }
     }
 }
 
