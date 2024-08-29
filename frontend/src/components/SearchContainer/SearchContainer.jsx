@@ -20,9 +20,10 @@ const SearchContainer = ({
     setMenuOpen,
     series,
     setSeries,
+    loadCitizens,
+    setDashboardView,
 }) => {
     const searchInputRef = useRef(null);
-    // const [series, setSeries] = useState('S1'); // "S1" or "S2"
     const [checked, setChecked] = useState(false);
 
     const handleGetCitizens = async () => {
@@ -36,10 +37,17 @@ const SearchContainer = ({
         setLoading(true);
         let citizenNfts;
 
+        if (queryType === 'ALL') {
+            let reset = true;
+            loadCitizens(reset);
+            setDashboardView(true);
+        }
         if (queryType === 'wallet') {
             citizenNfts = await getCitizenByWallet(query);
+            setDashboardView(false);
         } else if (queryType === 'token') {
             citizenNfts = await getCitizenByTokenId(query, series);
+            setDashboardView(false);
         }
 
         if (menuOpen) {
@@ -75,7 +83,8 @@ const SearchContainer = ({
             />
             <SearchButtonWrapper>
                 <SearchButton onClick={handleGetCitizens}>
-                    {searchInputRef.current ? 'Search' : 'Browse'}
+                    Search
+                    {/* {searchInputRef.current.value ? 'Search' : 'Browse'} */}
                 </SearchButton>
                 <CheckSlider onChange={handleChange} checked={checked} />
             </SearchButtonWrapper>

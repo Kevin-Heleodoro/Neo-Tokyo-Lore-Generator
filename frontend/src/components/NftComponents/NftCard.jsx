@@ -1,7 +1,15 @@
 import { useState } from 'react';
-import styled from 'styled-components';
 
 import LoaderComponent from '../Shared/LoaderComponent';
+import {
+    Card,
+    ImageContainer,
+    NftImage,
+    Details,
+    Button,
+    BackstoryContainer,
+    Paragraph,
+} from './NftComponents.styles';
 import { getLoreForCitizen } from '../../services/interfaces';
 
 const isDevelopment = process.env.NODE_ENV === 'development';
@@ -14,7 +22,7 @@ const isLocalhost = window.location.hostname === 'localhost';
  * @param {*} nft The NFT object to be displayed
  * @returns <NftCard />
  */
-const NftCard = ({ nft }) => {
+const NftCard = ({ nft, isThumbnail }) => {
     const [backstory, setBackstory] = useState(false);
     const [loading, setLoading] = useState(false);
     const [imageLoaded, setImageLoaded] = useState(false);
@@ -73,16 +81,24 @@ const NftCard = ({ nft }) => {
                     style={{ display: imageLoaded ? 'block' : 'none' }}
                 />
             </ImageContainer>
-            <Details>
-                <p>{nft.name}</p>
-                {loading ? (
-                    <LoaderComponent />
-                ) : backstory ? (
-                    <BackstoryContainer>{backstory}</BackstoryContainer>
-                ) : (
-                    <Button onClick={handleGenerateBackstory}>Who am I?</Button>
-                )}
-            </Details>
+            {isThumbnail ? (
+                <Details>
+                    <p>{nft.name}</p>
+                </Details>
+            ) : (
+                <Details>
+                    <p>{nft.name}</p>
+                    {loading ? (
+                        <LoaderComponent />
+                    ) : backstory ? (
+                        <BackstoryContainer>{backstory}</BackstoryContainer>
+                    ) : (
+                        <Button onClick={handleGenerateBackstory}>
+                            Who am I?
+                        </Button>
+                    )}
+                </Details>
+            )}
         </Card>
     );
 };
@@ -93,65 +109,65 @@ export default NftCard;
  * Styled Components
  */
 
-const Card = styled.div`
-    background-color: #1f1f1f;
-    border: 2px solid #8a2be2;
-    border-radius: 15px;
-    padding: 20px;
-    max-width: 400px;
-    margin: auto;
-    color: white;
-    box-shadow: 0 0 15px rgba(138, 43, 226, 0.7);
-    font-family: 'Roboto', sans-serif;
-`;
+// const Card = styled.div`
+//     background-color: #1f1f1f;
+//     border: 2px solid #8a2be2;
+//     border-radius: 15px;
+//     padding: 20px;
+//     max-width: 400px;
+//     margin: auto;
+//     color: white;
+//     box-shadow: 0 0 15px rgba(138, 43, 226, 0.7);
+//     font-family: 'Roboto', sans-serif;
+// `;
 
-const ImageContainer = styled.div`
-    display: flex;
-    justify-content: center;
-    margin-bottom: 20px;
-`;
+// const ImageContainer = styled.div`
+//     display: flex;
+//     justify-content: center;
+//     margin-bottom: 20px;
+// `;
 
-const NftImage = styled.img`
-    border-radius: 10px;
-    width: 100%;
-`;
+// const NftImage = styled.img`
+//     border-radius: 10px;
+//     width: 100%;
+// `;
 
-const Details = styled.div`
-    margin-bottom: 20px;
-    text-align: center;
-`;
+// const Details = styled.div`
+//     margin-bottom: 20px;
+//     text-align: center;
+// `;
 
-const Button = styled.button`
-    padding: 10px 20px;
-    font-size: 1em;
-    color: #ffffff;
-    background-color: #8a2be2;
-    border: none;
-    border-radius: 10px;
-    cursor: pointer;
-    transition: background-color 0.3s ease, box-shadow 0.3s ease;
+// const Button = styled.button`
+//     padding: 10px 20px;
+//     font-size: 1em;
+//     color: #ffffff;
+//     background-color: #8a2be2;
+//     border: none;
+//     border-radius: 10px;
+//     cursor: pointer;
+//     transition: background-color 0.3s ease, box-shadow 0.3s ease;
 
-    &:hover {
-        background-color: #7a1ed2;
-        box-shadow: 0 0 10px #7a1ed2;
-    }
-`;
+//     &:hover {
+//         background-color: #7a1ed2;
+//         box-shadow: 0 0 10px #7a1ed2;
+//     }
+// `;
 
-const BackstoryContainer = styled.div`
-    margin-top: 20px;
-    padding: 15px;
-    border: 1px solid #8a2be2;
-    border-radius: 10px;
-    background-color: #2a2a2a;
-    box-shadow: 0 0 10px rgba(138, 43, 226, 0.7);
-    max-height: 40vh;
-    overflow-y: auto;
+// const BackstoryContainer = styled.div`
+//     margin-top: 20px;
+//     padding: 15px;
+//     border: 1px solid #8a2be2;
+//     border-radius: 10px;
+//     background-color: #2a2a2a;
+//     box-shadow: 0 0 10px rgba(138, 43, 226, 0.7);
+//     max-height: 40vh;
+//     overflow-y: auto;
 
-    @media (max-width: 480px) {
-        max-height: 150px;
-    }
-`;
+//     @media (max-width: 480px) {
+//         max-height: 150px;
+//     }
+// `;
 
-const Paragraph = styled.p`
-    margin-bottom: 10px;
-`;
+// const Paragraph = styled.p`
+//     margin-bottom: 10px;
+// `;

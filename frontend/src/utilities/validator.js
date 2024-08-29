@@ -4,7 +4,9 @@ export const validateInput = (input) => {
         /^[a-zA-Z0-9-]+(\.eth|\.xyz|\.luxe|\.kred|\.art|\.link|\.eth\.link)$/;
     const tokenIdRegex = /^\d+$/;
 
-    if (ethAddressRegex.test(input)) {
+    if (input === '') {
+        return 'ALL';
+    } else if (ethAddressRegex.test(input)) {
         return 'wallet';
     } else if (ensDomainRegex.test(input)) {
         return 'wallet';

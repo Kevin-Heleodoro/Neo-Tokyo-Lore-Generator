@@ -14,12 +14,17 @@ const Dashboard = ({ nfts, setNfts, loading, setLoading }) => {
     const [series, setSeries] = useState('S1'); // "S1" or "S2"
     const [offset, setOffset] = useState('');
     const [limit, setLimit] = useState(15);
+    const [dashboardView, setDashboardView] = useState(true);
     const hasMounted = useRef(false);
 
-    const loadCitizens = async () => {
+    const loadCitizens = async (reset) => {
         setLoading(true);
         setNfts([]);
-        const data = await getAllCitizens(series, offset, limit);
+        setDashboardView(true);
+        if (reset) {
+            setOffset('');
+        }
+        const data = await getAllCitizens(series, reset ? '' : offset, limit);
         setNfts(data.nfts);
         setOffset(data.nextOffset);
         setLoading(false);
@@ -47,8 +52,18 @@ const Dashboard = ({ nfts, setNfts, loading, setLoading }) => {
                 setLoading={setLoading}
                 setSeries={setSeries}
                 series={series}
+                loadCitizens={loadCitizens}
+                setDashboardView={setDashboardView}
             />
-            {loading ? <LoaderComponent /> : <NftCardContainer nfts={nfts} />}
+            {loading ? (
+                <LoaderComponent />
+            ) : (
+                <NftCardContainer
+                    nfts={nfts}
+                    dashboardView={dashboardView}
+                    setDashboardView={setDashboardView}
+                />
+            )}
         </div>
     );
 };

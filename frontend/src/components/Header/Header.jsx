@@ -13,7 +13,14 @@ import {
 /**
  * This component is the header for the application. It displays the title and search bar.
  */
-const HeaderComponent = ({ setNfts, setLoading, setSeries, series }) => {
+const HeaderComponent = ({
+    setNfts,
+    setLoading,
+    setSeries,
+    series,
+    loadCitizens,
+    setDashboardView,
+}) => {
     const [menuOpen, setMenuOpen] = useState(false);
 
     const toggleMenu = () => {
@@ -49,6 +56,8 @@ const HeaderComponent = ({ setNfts, setLoading, setSeries, series }) => {
                     setLoading={setLoading}
                     setSeries={setSeries}
                     series={series}
+                    loadCitizens={loadCitizens}
+                    setDashboardView={setDashboardView}
                 />
             </SearchWrapper>
             <HamburgerMenu
@@ -67,6 +76,8 @@ const HeaderComponent = ({ setNfts, setLoading, setSeries, series }) => {
                         setLoading={setLoading}
                         setMenuOpen={setMenuOpen}
                         menuOpen={menuOpen}
+                        loadCitizens={loadCitizens}
+                        setDashboardView={setDashboardView}
                     />
                 </MobileSearchContainer>
             )}
