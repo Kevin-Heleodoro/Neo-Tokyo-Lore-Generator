@@ -12,7 +12,7 @@ import {
 const NftCardContainer = ({ nfts, setDashboardView, dashboardView }) => {
     return (
         <Backdrop>
-            <Container>
+            <Container dashboardView={dashboardView}>
                 {nfts?.length > 0 ? (
                     nfts.map((nft, index) =>
                         dashboardView ? (

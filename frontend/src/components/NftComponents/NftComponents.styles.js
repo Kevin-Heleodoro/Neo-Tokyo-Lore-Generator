@@ -10,6 +10,7 @@ export const Backdrop = styled.div`
     border-radius: 15px;
     margin: 1rem;
     border: 1px solid black;
+    min-width: 150px;
 `;
 
 export const Container = styled.div`
@@ -20,6 +21,26 @@ export const Container = styled.div`
     grid-template-columns: ${({ dashboardView }) =>
         dashboardView ? 'repeat(5, 1fr)' : '1fr'};
     gap: 1rem;
+
+    @media (max-width: 900px) {
+        grid-template-columns: ${({ dashboardView }) =>
+            dashboardView ? 'repeat(4, 1fr)' : '1fr'};
+    }
+
+    @media (max-width: 600px) {
+        grid-template-columns: ${({ dashboardView }) =>
+            dashboardView ? 'repeat(3, 1fr)' : '1fr'};
+    }
+
+    @media (max-width: 450px) {
+        grid-template-columns: ${({ dashboardView }) =>
+            dashboardView ? 'repeat(2, 1fr)' : '1fr'};
+    }
+
+    @media (max-width: 350px) {
+        grid-template-columns: ${({ dashboardView }) =>
+            dashboardView ? '1fr' : '1fr'};
+    }
 `;
 
 export const EmptyMessage = styled.div`
@@ -110,7 +131,7 @@ export const Thumbnail = styled.div`
     border: 2px solid #8a2be2;
     border-radius: 15px;
     padding: 5px;
-    max-width: 150px;
+    max-width: 400px;
     margin: auto;
     color: white;
     box-shadow: 0 0 15px rgba(138, 43, 226, 0.7);
