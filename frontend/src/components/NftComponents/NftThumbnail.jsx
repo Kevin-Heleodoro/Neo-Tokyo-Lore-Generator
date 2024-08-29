@@ -9,7 +9,6 @@ import {
 
 const NftThumbnail = ({ nft }) => {
     const [imageLoaded, setImageLoaded] = useState(false);
-    const [loading, setLoading] = useState(false);
 
     return (
         <Thumbnail>

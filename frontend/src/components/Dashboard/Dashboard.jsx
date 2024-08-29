@@ -13,7 +13,7 @@ import { getAllCitizens } from '../../services/interfaces';
 const Dashboard = ({ nfts, setNfts, loading, setLoading }) => {
     const [series, setSeries] = useState('S1'); // "S1" or "S2"
     const [offset, setOffset] = useState('');
-    const [limit, setLimit] = useState(15);
+    const [limit, setLimit] = useState(20);
     const [dashboardView, setDashboardView] = useState(true);
     const hasMounted = useRef(false);
 
@@ -21,9 +21,9 @@ const Dashboard = ({ nfts, setNfts, loading, setLoading }) => {
         setLoading(true);
         setNfts([]);
         setDashboardView(true);
-        if (reset) {
-            setOffset('');
-        }
+        // if (reset) {
+        //     setOffset('');
+        // }
         const data = await getAllCitizens(series, reset ? '' : offset, limit);
         setNfts(data.nfts);
         setOffset(data.nextOffset);

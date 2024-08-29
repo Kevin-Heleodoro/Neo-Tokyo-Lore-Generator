@@ -4,12 +4,22 @@ import styled from 'styled-components';
  * NftCardContainer
  */
 
-export const Container = styled.div`
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    flex-direction: row;
+export const Backdrop = styled.div`
+    background-color: rgba(0, 0, 0, 0.4); /* Opaque backdrop */
+    padding: 1rem;
+    border-radius: 15px;
     margin: 1rem;
+    border: 1px solid black;
+`;
+
+export const Container = styled.div`
+    display: ${({ dashboardView }) => (dashboardView ? 'grid' : 'flex')};
+    flex-wrap: ${({ dashboardView }) => (dashboardView ? 'nowrap' : 'wrap')};
+    justify-content: ${({ dashboardView }) =>
+        dashboardView ? 'start' : 'center'};
+    grid-template-columns: ${({ dashboardView }) =>
+        dashboardView ? 'repeat(5, 1fr)' : '1fr'};
+    gap: 1rem;
 `;
 
 export const EmptyMessage = styled.div`
