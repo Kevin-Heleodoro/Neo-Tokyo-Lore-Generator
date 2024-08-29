@@ -43,6 +43,39 @@ export const Container = styled.div`
     }
 `;
 
+export const PageSelectContainer = styled.div`
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 20px;
+    gap: 10px;
+`;
+
+export const PageButton = styled.button`
+    padding: 10px 15px;
+    font-size: 1em;
+    color: ${({ isActive }) => (isActive ? '#ffffff' : '#8a2be2')};
+    background-color: ${({ isActive }) =>
+        isActive ? '#8a2be2' : 'transparent'};
+    border: 2px solid #8a2be2;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+
+    &:hover {
+        background-color: #7a1ed2;
+        box-shadow: 0 0 10px #7a1ed2;
+    }
+
+    &:disabled {
+        color: #666;
+        background-color: #444;
+        border: 2px solid #444;
+        cursor: not-allowed;
+        box-shadow: none;
+    }
+`;
+
 export const EmptyMessage = styled.div`
     background-color: #1f1f1f;
     border: 2px solid #8a2be2;
