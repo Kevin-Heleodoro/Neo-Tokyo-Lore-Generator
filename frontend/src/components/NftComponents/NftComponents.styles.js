@@ -117,6 +117,8 @@ export const ImageContainer = styled.div`
 export const NftImage = styled.img`
     border-radius: 10px;
     width: 100%;
+    background-color: #2a2a2a;
+    aspect-ratio: 1 / 1;
 `;
 
 export const Details = styled.div`
@@ -173,5 +175,6 @@ export const Thumbnail = styled.div`
     &:hover {
         background-color: #2a2a2a;
         border: 4px solid #8a2be2;
+        cursor: pointer;
     }
 `;

@@ -23,20 +23,30 @@ const NftCardContainer = ({
     const handlePrevious = () => {
         if (currentPage > 1) {
             setCurrentPage(currentPage - 1);
-            loadCitizens(false); // Pass in appropriate arguments based on your logic
+            loadCitizens(false);
         }
     };
 
     const handleNext = () => {
         if (currentPage < totalPages) {
             setCurrentPage(currentPage + 1);
-            loadCitizens(false); // Pass in appropriate arguments based on your logic
+            loadCitizens(false);
         }
     };
 
     const handlePageSelect = (page) => {
         setCurrentPage(page);
-        loadCitizens(false); // Pass in appropriate arguments based on your logic
+        loadCitizens(false);
+    };
+
+    const generateHex = (page, limit) => {
+        let hex = '';
+        if (page === 1) {
+            return hex;
+        } else {
+            hex = (page - 1) * limit;
+        }
+        return hex.toString(16);
     };
 
     return (
@@ -65,12 +75,13 @@ const NftCardContainer = ({
             </Container>
             {dashboardView && (
                 <PageSelectContainer>
-                    <PageButton onClick={handlePrevious}>Previous</PageButton>
+                    <PageButton>Previous</PageButton>
+                    {/* <PageButton onClick={handlePrevious}>Previous</PageButton> */}
                     {Array.from({ length: 6 }, (_, index) => index + 1).map(
                         (page) => (
                             <PageButton
                                 key={page}
-                                onClick={() => handlePageSelect(page)}
+                                // onClick={() => handlePageSelect(page)}
                                 isActive={page === currentPage}
                             >
                                 {page}

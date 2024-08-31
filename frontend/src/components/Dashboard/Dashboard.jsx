@@ -18,11 +18,14 @@ const Dashboard = ({ nfts, setNfts, loading, setLoading }) => {
     const [dashboardView, setDashboardView] = useState(true);
     const hasMounted = useRef(false);
 
-    const loadCitizens = async (reset = false) => {
+    const loadCitizens = async (reset = false, newOffset = '') => {
         setLoading(true);
         setNfts([]);
         setDashboardView(true);
         let offsetValue = reset ? '' : offset;
+        if (newOffset) {
+            offsetValue = newOffset;
+        }
         const data = await getAllCitizens(series, offsetValue, limit);
         setNfts(data.nfts);
         setOffset(data.nextOffset);

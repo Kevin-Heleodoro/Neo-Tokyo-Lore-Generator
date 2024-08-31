@@ -163,6 +163,7 @@ class NFTController {
                     name: nft.name,
                     series: series,
                     img: MagicEdenImageURL(series, nft.tokenId),
+                    image: nft.image,
                     description: nft.description,
                     raw: {
                         metadata: nft.raw.metadata,
