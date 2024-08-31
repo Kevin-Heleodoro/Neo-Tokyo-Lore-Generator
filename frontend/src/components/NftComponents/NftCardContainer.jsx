@@ -71,7 +71,7 @@ const NftCardContainer = ({
                             <PageButton
                                 key={page}
                                 onClick={() => handlePageSelect(page)}
-                                isActive={page === currentPage} // Add a prop to highlight the active page
+                                isActive={page === currentPage}
                             >
                                 {page}
                             </PageButton>

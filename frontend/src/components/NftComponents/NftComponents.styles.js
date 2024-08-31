@@ -169,4 +169,9 @@ export const Thumbnail = styled.div`
     color: white;
     box-shadow: 0 0 15px rgba(138, 43, 226, 0.7);
     font-family: 'Roboto', sans-serif;
+
+    &:hover {
+        background-color: #2a2a2a;
+        border: 4px solid #8a2be2;
+    }
 `;
