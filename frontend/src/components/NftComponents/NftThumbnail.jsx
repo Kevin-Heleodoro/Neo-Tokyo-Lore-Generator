@@ -14,16 +14,20 @@ const backupImageUrl = require('../../img/neo_tokyo_filler.png');
 
 const NftThumbnail = ({ nft }) => {
     const [currentSrc, setCurrentSrc] = useState(backupImageUrl);
+    const [imageLoaded, setImageLoaded] = useState(false);
 
     const handleImageLoad = () => {
-        setCurrentSrc(nft.img);
-        // setCurrentSrc(nft.image.thumbnailUrl);
+        if (!imageLoaded) {
+            setImageLoaded(true);
+            setCurrentSrc(nft.img);
+        }
     };
 
     const handleImageError = () => {
         if (isDevelopment || isLocalhost) {
             console.log(`Error handling image for ${nft.name}`);
         }
+        setImageLoaded(true);
         setCurrentSrc(backupImageUrl);
     };
 

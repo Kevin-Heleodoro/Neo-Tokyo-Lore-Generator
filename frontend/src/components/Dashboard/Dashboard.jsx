@@ -6,19 +6,29 @@ import HeaderComponent from '../Header/Header';
 import LoaderComponent from '../Shared/LoaderComponent';
 import { getAllCitizens } from '../../services/interfaces';
 
+const isDevelopment = process.env.NODE_ENV === 'development';
+const isLocalhost = window.location.hostname === 'localhost';
+
 /**
  * This component is the dashboard for the application. It displays the header and
  * the NFT card container. It also sets the global styles for the application.
  */
 const Dashboard = ({ nfts, setNfts, loading, setLoading }) => {
+    // const [currentPage, setCurrentPage] = useState(1);
     const [series, setSeries] = useState('S1'); // "S1" or "S2"
     const [offset, setOffset] = useState('');
-    const [currentPage, setCurrentPage] = useState(1);
     const [limit] = useState(20);
     const [dashboardView, setDashboardView] = useState(true);
     const hasMounted = useRef(false);
 
     const loadCitizens = async (reset = false, newOffset = '') => {
+        if (isDevelopment || isLocalhost) {
+            console.log(
+                `loadCitizens called with reset: ${reset} and newOffset: ${newOffset}`
+            );
+            console.log(`limit is set to: ${limit}`);
+            console.log(`offset is set to: ${offset}`);
+        }
         setLoading(true);
         setNfts([]);
         setDashboardView(true);
@@ -65,6 +75,8 @@ const Dashboard = ({ nfts, setNfts, loading, setLoading }) => {
                     dashboardView={dashboardView}
                     setDashboardView={setDashboardView}
                     loadCitizens={loadCitizens}
+                    // currentPage={currentPage}
+                    // setCurrentPage={setCurrentPage}
                 />
             )}
         </div>
