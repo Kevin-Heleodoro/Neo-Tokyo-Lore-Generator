@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import React, { useState } from 'react';
 
 import LoaderComponent from '../Shared/LoaderComponent';
 import {
@@ -15,6 +15,8 @@ import { getLoreForCitizen } from '../../services/interfaces';
 const isDevelopment = process.env.NODE_ENV === 'development';
 const isLocalhost = window.location.hostname === 'localhost';
 
+const backupImageUrl = require('../../img/neo_tokyo_filler.png');
+
 /**
  * This component is a card that displays an NFT object. It displays the NFT's name,
  * image, collection, contract address, token ID, and token type.
@@ -25,6 +27,7 @@ const isLocalhost = window.location.hostname === 'localhost';
 const NftCard = ({ nft, isThumbnail }) => {
     const [backstory, setBackstory] = useState(false);
     const [loading, setLoading] = useState(false);
+    const [currentSrc, setCurrentSrc] = useState(backupImageUrl);
     const [imageLoaded, setImageLoaded] = useState(false);
 
     const handleGenerateBackstory = async () => {
@@ -69,36 +72,41 @@ const NftCard = ({ nft, isThumbnail }) => {
         }
     };
 
+    const handleImageLoad = () => {
+        if (!imageLoaded) {
+            setImageLoaded(true);
+            setCurrentSrc(nft.img);
+        }
+    };
+
+    const handleImageError = () => {
+        if (isDevelopment || isLocalhost) {
+            console.log(`Error handling image for ${nft.name}`);
+        }
+        setImageLoaded(true);
+        setCurrentSrc(backupImageUrl);
+    };
+
     return (
         <Card key={nft.contract.address + nft.tokenId}>
-            <ImageContainer>
-                {!imageLoaded && <LoaderComponent />}
+            <ImageContainer alt={nft.name}>
                 <NftImage
-                    src={nft.img}
+                    src={currentSrc}
                     alt={nft.name}
-                    onLoad={() => setImageLoaded(true)}
-                    onError={() => setImageLoaded(false)}
-                    style={{ display: imageLoaded ? 'block' : 'none' }}
+                    onLoad={handleImageLoad}
+                    onError={handleImageError}
                 />
             </ImageContainer>
-            {isThumbnail ? (
-                <Details>
-                    <p>{nft.name}</p>
-                </Details>
-            ) : (
-                <Details>
-                    <p>{nft.name}</p>
-                    {loading ? (
-                        <LoaderComponent />
-                    ) : backstory ? (
-                        <BackstoryContainer>{backstory}</BackstoryContainer>
-                    ) : (
-                        <Button onClick={handleGenerateBackstory}>
-                            Who am I?
-                        </Button>
-                    )}
-                </Details>
-            )}
+            <Details>
+                <p>{nft.name}</p>
+                {loading ? (
+                    <LoaderComponent />
+                ) : backstory ? (
+                    <BackstoryContainer>{backstory}</BackstoryContainer>
+                ) : (
+                    <Button onClick={handleGenerateBackstory}>Who am I?</Button>
+                )}
+            </Details>
         </Card>
     );
 };
