@@ -27,36 +27,31 @@ const NftCardContainer = React.memo(
         const [totalPages, setTotalPages] = useState(20);
         const itemsPerPage = 20;
 
-        // useEffect(() => {
-        //     const calculatedTotalPages = Math.ceil(nfts.length / itemsPerPage);
-        //     setTotalPages(calculatedTotalPages > 0 ? calculatedTotalPages : 1);
-        // }, [nfts])
+        const handlePrevious = () => {
+            if (currentPage > 1) {
+                let prevHex = generateHex(currentPage - 1, 20);
+                setCurrentPage(currentPage - 1);
+                if (isDevelopment || isLocalhost) {
+                    console.log(
+                        `Previous hex: ${prevHex},
+                        currentPage: ${currentPage}`
+                    );
+                }
+                loadCitizens(false, prevHex);
+            }
+        };
 
-        // const handlePrevious = () => {
-        //     if (currentPage > 1) {
-        //         let prevHex = generateHex(currentPage - 1, 20);
-        //         setCurrentPage(currentPage - 1);
-        //         if (isDevelopment || isLocalhost) {
-        //             console.log(
-        //                 `Previous hex: ${prevHex},
-        //                 currentPage: ${currentPage}`
-        //             );
-        //         }
-        //         loadCitizens(false, prevHex);
-        //     }
-        // };
-
-        // const handleNext = () => {
-        //     if (currentPage < totalPages) {
-        //         if (isDevelopment || isLocalhost) {
-        //             console.log(`Current page: ${currentPage}`);
-        //             console.log(`Next page: ${currentPage + 1}`);
-        //         }
-        //         setCurrentPage(currentPage + 1);
-        //         console.log({ currentPage });
-        //         loadCitizens(false);
-        //     }
-        // };
+        const handleNext = () => {
+            if (currentPage < totalPages) {
+                if (isDevelopment || isLocalhost) {
+                    console.log(`Current page: ${currentPage}`);
+                    console.log(`Next page: ${currentPage + 1}`);
+                }
+                setCurrentPage(currentPage + 1);
+                console.log({ currentPage });
+                loadCitizens(false);
+            }
+        };
 
         const generateHex = useCallback((page) => {
             if (page === 1) return '';
@@ -74,18 +69,6 @@ const NftCardContainer = React.memo(
             },
             [generateHex, loadCitizens]
         );
-
-        const handlePrevious = useCallback(() => {
-            if (currentPage > 1) {
-                handlePageChange(currentPage - 1);
-            }
-        }, [currentPage, handlePageChange]);
-
-        const handleNext = useCallback(() => {
-            if (currentPage < totalPages) {
-                handlePageChange(currentPage + 1);
-            }
-        }, [currentPage, totalPages, handlePageChange]);
 
         const getPageNumbers = useCallback(() => {
             const pageNumbers = [];
@@ -106,21 +89,6 @@ const NftCardContainer = React.memo(
 
             return pageNumbers;
         }, [currentPage, totalPages]);
-
-        // const handlePageSelect = (page) => {
-        //     setCurrentPage(page);
-        //     loadCitizens(false);
-        // };
-
-        // const generateHex = (page, limit) => {
-        //     let hex = 1;
-        //     if (page === 1) {
-        //         return hex;
-        //     } else {
-        //         hex = (page - 1) * limit;
-        //     }
-        //     return hex.toString(16);
-        // };
 
         return (
             <Backdrop>
